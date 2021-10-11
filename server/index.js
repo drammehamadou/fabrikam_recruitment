@@ -12,19 +12,33 @@ const api = process.env.API_URL;
 app.use(express.json());
 app.use(morgan('tiny'));
 
-app.get(`${api}/trainings`, (req, res) => {
-    const training = {
-        id: 1,
-        name: 'CV writing',
-        image: 'some_url'
-    }
-    res.send(training);
+const trainingSchema = mongoose.Schema({
+    title:  String, // String is shorthand for {type: String}
+    description: String,
+    image: String
+})
+
+const Training = mongoose.model('Training', trainingSchema);
+
+app.get(`${api}/trainings`, async (req, res) => {
+    const trainingList = await Training.find();
+    res.send(trainingList);
 })
 
 app.post(`${api}/trainings`, (req, res) => {
-    const newTraining = req.body;
-    console.log(newTraining)
-    res.send(newTraining);
+    const training = new Training ({
+        title: req.body.title,
+        description: req.body.description,
+        image: req.body.image
+    })
+    training.save().then((createTraining => {
+        res.status(201).json(createTraining)
+    })).catch((err) => {
+        res.status(500).json({
+            error: err,
+            success: false
+        })
+    })
 })
 
 //database connection

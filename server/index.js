@@ -2,9 +2,13 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 //environment variables
 require('dotenv/config');
+
+app.use(cors());
+app.options('*', cors);
 
 //middlewares
 app.use(express.json());

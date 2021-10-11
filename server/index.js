@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 
 //environment variables
 require('dotenv/config');
@@ -24,6 +25,19 @@ app.post(`${api}/trainings`, (req, res) => {
     const newTraining = req.body;
     console.log(newTraining)
     res.send(newTraining);
+})
+
+//database connection
+mongoose.connect(process.env.CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: 'fabrikam-db'
+})
+.then(() =>{
+    console.log('Database connection is ready...')
+})
+.catch((err) => {
+    console.log(err);
 })
 
 app.listen(2021, () => {

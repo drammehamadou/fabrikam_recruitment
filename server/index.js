@@ -6,40 +6,22 @@ const mongoose = require('mongoose');
 //environment variables
 require('dotenv/config');
 
-const api = process.env.API_URL;
-
 //middlewares
 app.use(express.json());
 app.use(morgan('tiny'));
 
-const trainingSchema = mongoose.Schema({
-    title:  String, // String is shorthand for {type: String}
-    description: String,
-    image: String
-})
+//Routes
+const attendeesRouter = require('./routers/attendees');
+const bookingsRouter = require('./routers/bookings');
+const subjectsRouter = require('./routers/subjects');
+const trainingsRouter = require('./routers/trainings');
 
-const Training = mongoose.model('Training', trainingSchema);
+const api = process.env.API_URL;
 
-app.get(`${api}/trainings`, async (req, res) => {
-    const trainingList = await Training.find();
-    res.send(trainingList);
-})
-
-app.post(`${api}/trainings`, (req, res) => {
-    const training = new Training ({
-        title: req.body.title,
-        description: req.body.description,
-        image: req.body.image
-    })
-    training.save().then((createTraining => {
-        res.status(201).json(createTraining)
-    })).catch((err) => {
-        res.status(500).json({
-            error: err,
-            success: false
-        })
-    })
-})
+app.use(`${api}/attendees`, trainingsRouter);
+app.use(`${api}/bookings`, trainingsRouter);
+app.use(`${api}/subjects`, trainingsRouter);
+app.use(`${api}/trainings`, trainingsRouter);
 
 //database connection
 mongoose.connect(process.env.CONNECTION_STRING, {
@@ -54,6 +36,7 @@ mongoose.connect(process.env.CONNECTION_STRING, {
     console.log(err);
 })
 
+//server
 app.listen(2021, () => {
     console.log('Server is running http://localhost:2021');
 })

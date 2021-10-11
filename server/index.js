@@ -6,11 +6,24 @@ require('dotenv/config');
 
 const api = process.env.API_URL;
 
-app.get('/', (req, res) => {
-    res.send(' Hello Amadou');
+//middlewares
+app.use(express.json());
+
+app.get(`${api}/trainings`, (req, res) => {
+    const training = {
+        id: 1,
+        name: 'CV writing',
+        image: 'some_url'
+    }
+    res.send(training);
+})
+
+app.post(`${api}/trainings`, (req, res) => {
+    const newTraining = req.body;
+    console.log(newTraining)
+    res.send(newTraining);
 })
 
 app.listen(2021, () => {
-    console.log(api);
     console.log('Server is running http://localhost:2021');
 })

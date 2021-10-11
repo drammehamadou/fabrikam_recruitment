@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
 
 //environment variables
 require('dotenv/config');
@@ -8,6 +9,7 @@ const api = process.env.API_URL;
 
 //middlewares
 app.use(express.json());
+app.use(morgan('tiny'));
 
 app.get(`${api}/trainings`, (req, res) => {
     const training = {

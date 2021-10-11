@@ -1,0 +1,15 @@
+{
+  "name": "fabrikam_recruitment",
+  "version": "1.0.0",
+  "description": "A recruitment company, Fabrikam, is running training events across the UK for any professionals seeking",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amadou Drammeh",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.13"
+  }
+}

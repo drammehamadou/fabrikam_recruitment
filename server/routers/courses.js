@@ -3,6 +3,22 @@ const router = express.Router();
 
 const {Course} = require('../models/course');
 
+//add a course
+router.post(`/`, async (req, res) => {
+    let course = new Course({
+        name: req.body.name,
+        icon: req.body.icon,
+        color: req.body.color
+    })
+
+course = await course.save();
+
+if (!course)
+return res.status(404).send('The course cannot be created.')
+
+res.send(course);
+})
+
 //get a course
 router.get(`/`, async (req, res) => {
     const courseList = await Course.find();
@@ -25,18 +41,20 @@ router.get(`/:id`, async(req, res) => {
     res.status(200).send(course);
 })
 
-//add a course
-router.post(`/`, async (req, res) => {
-    let course = new Course({
-        name: req.body.name,
-        icon: req.body.icon,
-        color: req.body.color
-    })
-
-course = await course.save();
-
-if (!course)
-return res.status(404).send('The course cannot be created.')
+//update a course
+router.put(`/:id`, async (req, res) => {
+    const course = await Course.findByIdAndUpdate(
+        req.params.id, 
+        {
+            name: req.body.name,
+            icon: req.body.icon,
+            color: req.body.color
+        },
+        //return new updated data
+        {new: true}
+    )
+    if (!course)
+return res.status(404).send('The course cannot be updated.')
 
 res.send(course);
 })

@@ -22,14 +22,14 @@ const trainingSchema = mongoose.Schema({
     },
     course: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'course',
+        ref: 'Course',
         required: true
     },
     rating: {
         type: Number,
         default: 0
     },
-    numReviews: {
+    reviews: {
         type: Number,
         default: 0
     },

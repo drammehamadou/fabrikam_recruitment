@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const {Training} = require('../models/training');
+const {Course} = require('../models/course');
 
+//get a training
 router.get(`/`, async (req, res) => {
     const trainingList = await Training.find();
 
@@ -12,20 +15,28 @@ router.get(`/`, async (req, res) => {
     res.send(trainingList);
 })
 
-router.post(`/`, (req, res) => {
-    const training = new Training ({
+//post a training
+router.post(`/`, async (req, res) => {
+
+    const course = await Course.findById(req.body.course);
+    if(!course) return res.status(400).send('Invalid Course')
+
+    let training = new Training ({
         title: req.body.title,
         description: req.body.description,
-        image: req.body.image
+        image: req.body.image,
+        price: req.body.price,
+        course: req.body.course,
+        rating: req.body.rating,
+        reviews: req.body.reviews,
+        isFeatured: req.body.isFeatured
     })
-    training.save().then((createTraining => {
-        res.status(201).json(createTraining)
-    })).catch((err) => {
-        res.status(500).json({
-            error: err,
-            success: false
-        })
-    })
+
+    training = await training.save();
+    if (!training)
+    return res.status(500).send('Training cannot be created.'
+    )
+    res.send(training);
 })
 
 module.exports=router;

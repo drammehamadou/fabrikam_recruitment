@@ -31,7 +31,7 @@ router.post(`/`, async (req, res) => {
 
 //get a training
 router.get(`/`, async (req, res) => {
-    const trainingList = await Training.find();
+    const trainingList = await Training.find().populate('course');
 
     if (!trainingList){
         res.status(500).json({success: false})
@@ -41,7 +41,7 @@ router.get(`/`, async (req, res) => {
 
 //get a training by id
 router.get(`/:id`, async (req, res) => {
-    const training = await Training.findById(req.params.id);
+    const training = await Training.findById(req.params.id).populate('course');
 
     if (!training){
         res.status(500).json({success: false})

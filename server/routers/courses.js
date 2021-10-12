@@ -1,45 +1,45 @@
 const express = require('express');
 const router = express.Router();
 
-const {Subject} = require('../models/subject');
+const {Course} = require('../models/course');
 
-//get a subject
+//get a course
 router.get(`/`, async (req, res) => {
-    const subjectList = await Subject.find();
+    const courseList = await Course.find();
 
-    if (!subjectList){
+    if (!courseList){
         res.status(500).json({success: false})
     }
-    res.send(subjectList);
+    res.send(courseList);
 })
 
-//add a subject
+//add a course
 router.post(`/`, async (req, res) => {
-    let subject = new Subject({
+    let course = new Course({
         name: req.body.name,
         icon: req.body.icon,
         color: req.body.color
     })
 
-subject = await subject.save();
+course = await course.save();
 
-if (!subject)
-return res.status(404).send('The subject cannot be created.')
+if (!course)
+return res.status(404).send('The course cannot be created.')
 
-res.send(subject);
+res.send(course);
 })
 
-//delete a subject
+//delete a course
 //api/v1/id
 router.delete(`/:id`, (req, res) => {
-    Subject.findByIdAndRemove(req.params.id).then(subject => {
-        if(subject) {
+    course.findByIdAndRemove(req.params.id).then(course => {
+        if(course) {
             return res.status(200).json({
-                success: true, message: 'The subject is deleted.'
+                success: true, message: 'The course is deleted.'
             })
         } else {
             return res.status(404).json({
-                success: false, message: 'subject not found'})
+                success: false, message: 'course not found'})
         }
     }).catch(err => {
         return res.status(404).json({success: false, error: err})

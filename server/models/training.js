@@ -20,9 +20,9 @@ const trainingSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    subject: {
+    course: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'subject',
+        ref: 'course',
         required: true
     },
     rating: {

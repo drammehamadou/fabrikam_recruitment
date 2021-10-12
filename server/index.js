@@ -17,14 +17,14 @@ app.use(morgan('tiny'));
 //Routes
 const attendeesRouter = require('./routers/attendees');
 const bookingsRouter = require('./routers/bookings');
-const subjectsRouter = require('./routers/subjects');
+const coursesRouter = require('./routers/courses');
 const trainingsRouter = require('./routers/trainings');
 
 const api = process.env.API_URL;
 
 app.use(`${api}/attendees`, attendeesRouter);
 app.use(`${api}/bookings`, bookingsRouter);
-app.use(`${api}/subjects`, subjectsRouter);
+app.use(`${api}/courses`, coursesRouter);
 app.use(`${api}/trainings`, trainingsRouter);
 
 //database connection

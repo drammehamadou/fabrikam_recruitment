@@ -22,9 +22,9 @@ const trainingsRouter = require('./routers/trainings');
 
 const api = process.env.API_URL;
 
-app.use(`${api}/attendees`, trainingsRouter);
-app.use(`${api}/bookings`, trainingsRouter);
-app.use(`${api}/subjects`, trainingsRouter);
+app.use(`${api}/attendees`, attendeesRouter);
+app.use(`${api}/bookings`, bookingsRouter);
+app.use(`${api}/subjects`, subjectsRouter);
 app.use(`${api}/trainings`, trainingsRouter);
 
 //database connection

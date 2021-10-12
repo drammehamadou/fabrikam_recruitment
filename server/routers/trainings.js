@@ -5,16 +5,6 @@ const mongoose = require('mongoose');
 const {Training} = require('../models/training');
 const {Course} = require('../models/course');
 
-//get a training
-router.get(`/`, async (req, res) => {
-    const trainingList = await Training.find();
-
-    if (!trainingList){
-        res.status(500).json({success: false})
-    }
-    res.send(trainingList);
-})
-
 //post a training
 router.post(`/`, async (req, res) => {
 
@@ -36,6 +26,26 @@ router.post(`/`, async (req, res) => {
     if (!training)
     return res.status(500).send('Training cannot be created.'
     )
+    res.send(training);
+})
+
+//get a training
+router.get(`/`, async (req, res) => {
+    const trainingList = await Training.find();
+
+    if (!trainingList){
+        res.status(500).json({success: false})
+    }
+    res.send(trainingList);
+})
+
+//get a training by id
+router.get(`/:id`, async (req, res) => {
+    const training = await Training.findById(req.params.id);
+
+    if (!training){
+        res.status(500).json({success: false})
+    }
     res.send(training);
 })
 

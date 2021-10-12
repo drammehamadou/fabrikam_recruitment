@@ -10,7 +10,19 @@ router.get(`/`, async (req, res) => {
     if (!courseList){
         res.status(500).json({success: false})
     }
-    res.send(courseList);
+    res.status(200).send(courseList);
+})
+
+//get lsit of courses
+router.get(`/:id`, async(req, res) => {
+    const course = await Course.findById(req.params.id);
+
+    if(!course) {
+        res.status(500).json({
+            message: 'The course with that id was not found'
+        })
+    }
+    res.status(200).send(course);
 })
 
 //add a course

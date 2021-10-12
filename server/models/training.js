@@ -49,4 +49,13 @@ const trainingSchema = mongoose.Schema({
     }
 })
 
+//change _id to id
+trainingSchema.virtual('id').get(function () {
+    return this._id.toHexString();
+});
+
+trainingSchema.set('toJSON', {
+    virtuals: true,
+});
+
 exports.Training = mongoose.model('Training', trainingSchema);

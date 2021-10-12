@@ -13,4 +13,12 @@ const courseSchema = mongoose.Schema({
     }
 })
 
+courseSchema.virtual('id').get(function () {
+    return this._id.toHexString();
+});
+
+courseSchema.set('toJSON', {
+    virtuals: true,
+});
+
 exports.Course = mongoose.model('Course', courseSchema);

@@ -25,6 +25,12 @@ const trainingSchema = mongoose.Schema({
         ref: 'Course',
         required: true
     },
+    countTraining: {
+        type: Number,
+        required: true,
+        min: 0,
+        max: 255
+    },
     rating: {
         type: Number,
         default: 0

@@ -17,6 +17,7 @@ router.post(`/`, async (req, res) => {
         image: req.body.image,
         price: req.body.price,
         course: req.body.course,
+        countTraining: req.body.countTraining,
         rating: req.body.rating,
         reviews: req.body.reviews,
         isFeatured: req.body.isFeatured
@@ -31,7 +32,12 @@ router.post(`/`, async (req, res) => {
 
 //get a training
 router.get(`/`, async (req, res) => {
-    const trainingList = await Training.find().populate('course');
+    let filter = {};
+    if (req.query.courses)
+    {
+        filter = {course: req.query.courses.split(',')}
+    }
+    const trainingList = await Training.find(filter).populate('course');
 
     if (!trainingList){
         res.status(500).json({success: false})
@@ -65,6 +71,7 @@ router.put(`/:id`, async (req, res) => {
             image: req.body.image,
             price: req.body.price,
             course: req.body.course,
+            countTraining: req.body.countTraining,
             rating: req.body.rating,
             reviews: req.body.reviews,
             isFeatured: req.body.isFeatured
@@ -92,6 +99,29 @@ router.delete(`/:id`, (req, res) => {
     }).catch(err => {
         return res.status(500).json({success: false, error: err})
     })
+})
+
+//get number of trainings
+router.get(`/get/count`, async (req, res) =>{
+    const trainingCount = await Training.countDocuments((count) => count)
+
+    if(!trainingCount) {
+        res.status(500).json({success: false})
+    } 
+    res.send({
+        trainingCount: trainingCount
+    });
+})
+
+//trainings to be featured on the landing page
+router.get(`/get/featured/:count`, async (req, res) =>{
+    const count = req.params.count ? req.params.count : 0
+    const trainings = await Training.find({isFeatured: true}).limit(+count);
+
+    if(!trainings) {
+        res.status(500).json({success: false})
+    } 
+    res.send(trainings);
 })
 
 module.exports=router;

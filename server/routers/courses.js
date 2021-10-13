@@ -19,7 +19,7 @@ return res.status(404).send('The course cannot be created.')
 res.send(course);
 })
 
-//get a course
+//get the list of courses
 router.get(`/`, async (req, res) => {
     const courseList = await Course.find();
 
@@ -29,7 +29,7 @@ router.get(`/`, async (req, res) => {
     res.status(200).send(courseList);
 })
 
-//get a couse by id
+//get a course by id
 router.get(`/:id`, async(req, res) => {
     const course = await Course.findById(req.params.id);
 
@@ -41,7 +41,7 @@ router.get(`/:id`, async(req, res) => {
     res.status(200).send(course);
 })
 
-//update course
+//update a course
 router.put(`/:id`, async (req, res) => {
     const course = await Course.findByIdAndUpdate(
         req.params.id, 
@@ -62,7 +62,7 @@ res.send(course);
 //delete a course
 //api/v1/id
 router.delete(`/:id`, (req, res) => {
-    course.findByIdAndRemove(req.params.id).then(course => {
+    Course.findByIdAndRemove(req.params.id).then(course => {
         if(course) {
             return res.status(200).json({
                 success: true, message: 'The course is deleted.'
@@ -76,4 +76,4 @@ router.delete(`/:id`, (req, res) => {
     })
 })
 
-module.exports=router;
+module.exports = router;

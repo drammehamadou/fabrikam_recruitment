@@ -27,9 +27,9 @@ router.post('/', async (req,res)=>{
     res.send(attendee);
 })
 
-//get the attendee
+//get list of attendees
 router.get(`/`, async (req, res) => {
-    const attendeeList = await Attendee.find();
+    const attendeeList = await Attendee.find().select('-passwordHash');
 
     if (!attendeeList){
         res.status(500).json({success: false})
@@ -37,7 +37,7 @@ router.get(`/`, async (req, res) => {
     res.send(attendeeList);
 })
 
-//get an attendee by id
+//get attendee by id
 router.get('/:id', async(req,res)=>{
     const attendee = await Attendee.findById(req.params.id).select('-passwordHash');
 
@@ -48,7 +48,7 @@ router.get('/:id', async(req,res)=>{
 })
 
 //update attendee
-router.put('/:id',async (req, res)=> {
+router.put('/:id', async (req, res) => {
 
     const attendeeExist = await Attendee.findById(req.params.id);
     let newPassword

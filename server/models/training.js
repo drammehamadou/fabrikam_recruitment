@@ -29,7 +29,7 @@ const trainingSchema = mongoose.Schema({
         type: Number,
         required: true,
         min: 0,
-        max: 255
+        max: 500
     },
     rating: {
         type: Number,

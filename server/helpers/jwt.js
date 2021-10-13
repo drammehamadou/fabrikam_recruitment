@@ -10,8 +10,10 @@ function authJwt() {
         isRevoked: isRevoked
     }).unless({
         path: [
+            { url: /\/public\/uploads(.*)/, methods: ['GET', 'OPTIONS'] },
             {url: /\/api\/v1\/trainings(.*)/ , methods: ['GET', 'OPTIONS'] },
             {url: /\/api\/v1\/courses(.*)/ , methods: ['GET', 'OPTIONS'] },
+            { url: /\/api\/v1\/bookings(.*)/, methods: ['GET', 'OPTIONS', 'POST'] },
             `${api}/attendees/login`,
             `${api}/attendees/register`,
         ]

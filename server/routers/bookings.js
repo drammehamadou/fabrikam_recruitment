@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const {Booking} = require('../models/booking');
-const { BookingUnit } = require('../models/booking-unit');
+const {BookingUnit} = require('../models/booking-unit');
 
 //create booking
 router.post('/', async (req,res)=>{
-    const bookingUnitsIds = Promise.all(req.body.bookingUnits.map(async (bookingUnit) => {
+    const bookingUnitsIds = Promise.all(
+        req.body.bookingUnits.map(async (bookingUnit) => {
         let newBookingUnit = new BookingUnit({
             quantity: bookingUnit.quantity,
             training: bookingUnit.training
@@ -18,7 +19,8 @@ router.post('/', async (req,res)=>{
     }))
     const bookingUnitsIdsResolved =  await bookingUnitsIds;
 
-    const totalPrices = await Promise.all(bookingUnitsIdsResolved.map(async (bookingUnitId)=>{
+    const totalPrices = await Promise.all(
+        bookingUnitsIdsResolved.map(async (bookingUnitId) => {
         const bookingUnit = await bookingUnit.findById(bookingUnitId).populate('training', 'price');
         const totalPrice = bookingUnit.training.price * bookingUnit.quantity;
         return totalPrice
@@ -44,10 +46,13 @@ router.post('/', async (req,res)=>{
     return res.status(400).send('the booking cannot be created!')
 
     res.send(booking);
-})
+});
 
+//get list of bookings
 router.get(`/`, async (req, res) =>{
-    const bookingList = await Booking.find().populate('attendee', 'name').sort({'dateBooked': -1});
+    const bookingList = await Booking.find()
+    .populate('attendee', 'name')
+    .sort({'dateBooked': -1});
 
     if(!bookingList) {
         res.status(500).json({success: false})
@@ -55,12 +60,15 @@ router.get(`/`, async (req, res) =>{
     res.send(bookingList);
 })
 
+//get a booking by id
 router.get(`/:id`, async (req, res) =>{
     const booking = await Booking.findById(req.params.id)
     .populate('attendee', 'name')
     .populate({ 
-        path: 'bookingUnits', populate: {
-            path : 'training', populate: 'course'} 
+        path: 'bookingUnits', 
+        populate: {
+            path : 'training', 
+            populate: 'course'} 
         });
 
     if(!booking) {
@@ -69,7 +77,8 @@ router.get(`/:id`, async (req, res) =>{
     res.send(booking);
 })
 
-router.put('/:id',async (req, res)=> {
+//update a booking
+router.put('/:id', async (req, res) => {
     const booking = await Booking.findByIdAndUpdate(
         req.params.id,
         {
@@ -84,13 +93,14 @@ router.put('/:id',async (req, res)=> {
     res.send(booking);
 })
 
-
+//delete a booking
 router.delete('/:id', (req, res)=>{
-    Booking.findByIdAndRemove(req.params.id).then(async booking =>{
+    Booking.findByIdAndRemove(req.params.id)
+    .then(async (booking) =>{
         if(booking) {
-            await booking.bookingUnits.map(async bookingUnit => {
+            await booking.bookingUnits.map(async (bookingUnit) => {
                 await bookingUnit.findByIdAndRemove(bookingUnit)
-            })
+            });
             return res.status(200).json({success: true, message: 'the booking is deleted!'})
         } else {
             return res.status(404).json({success: false , message: "booking not found!"})
@@ -100,10 +110,11 @@ router.delete('/:id', (req, res)=>{
     })
 })
 
+//if booking is charged, get the total price
 router.get('/get/totalsales', async (req, res)=> {
     const totalSales= await Booking.aggregate([
         { $group: { _id: null , totalsales : { $sum : '$totalPrice'}}}
-    ])
+    ]);
 
     if(!totalSales) {
         return res.status(400).send('The booking sales cannot be generated')
@@ -112,6 +123,7 @@ router.get('/get/totalsales', async (req, res)=> {
     res.send({totalsales: totalSales.pop().totalsales})
 })
 
+//get total number of bookings
 router.get(`/get/count`, async (req, res) =>{
     const bookingCount = await Booking.countDocuments((count) => count)
 
@@ -123,7 +135,7 @@ router.get(`/get/count`, async (req, res) =>{
     });
 })
 
-router.get(`/get/atendeetrainings/:attendeeid`, async (req, res) =>{
+router.get(`/get/attendeetrainings/:attendeeid`, async (req, res) =>{
     const attendeeTrainingList = await Booking.find({attendee: req.params.attendeeid}).populate({ 
         path: 'bookingUnits', populate: {
             path : 'training', populate: 'course'} 

@@ -29,7 +29,7 @@ router.get(`/`, async (req, res) => {
     res.status(200).send(courseList);
 })
 
-//get lsit of courses
+//get a couse by id
 router.get(`/:id`, async(req, res) => {
     const course = await Course.findById(req.params.id);
 
@@ -41,7 +41,7 @@ router.get(`/:id`, async(req, res) => {
     res.status(200).send(course);
 })
 
-//update a course
+//update course
 router.put(`/:id`, async (req, res) => {
     const course = await Course.findByIdAndUpdate(
         req.params.id, 

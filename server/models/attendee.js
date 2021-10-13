@@ -52,3 +52,4 @@ attendeeSchema.set('toJSON', {
 });
 
 exports.Attendee = mongoose.model('Attendee', attendeeSchema);
+exports.attendeeSchema = attendeeSchema;

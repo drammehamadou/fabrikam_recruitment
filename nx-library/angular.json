@@ -117,6 +117,88 @@
         }
       }
     },
+    "attendees": {
+      "projectType": "library",
+      "root": "libs/attendees",
+      "sourceRoot": "libs/attendees/src",
+      "prefix": "attendees",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/attendees"],
+          "options": {
+            "project": "libs/attendees/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/attendees/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/attendees/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/attendees"],
+          "options": {
+            "jestConfig": "libs/attendees/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/attendees/src/**/*.ts",
+              "libs/attendees/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "bookings": {
+      "projectType": "library",
+      "root": "libs/bookings",
+      "sourceRoot": "libs/bookings/src",
+      "prefix": "bookings",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/bookings"],
+          "options": {
+            "project": "libs/bookings/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/bookings/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/bookings/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/bookings"],
+          "options": {
+            "jestConfig": "libs/bookings/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/bookings/src/**/*.ts",
+              "libs/bookings/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "fabrikam": {
       "projectType": "application",
       "root": "apps/fabrikam",
@@ -233,6 +315,31 @@
           "outputs": ["{options.outputFile}"],
           "options": {
             "lintFilePatterns": ["apps/fabrikam-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "trainings": {
+      "projectType": "library",
+      "root": "libs/trainings",
+      "sourceRoot": "libs/trainings/src",
+      "prefix": "nx-library",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/trainings"],
+          "options": {
+            "jestConfig": "libs/trainings/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/trainings/src/**/*.ts",
+              "libs/trainings/src/**/*.html"
+            ]
           }
         }
       }

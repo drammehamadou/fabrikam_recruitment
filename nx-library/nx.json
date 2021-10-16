@@ -34,12 +34,21 @@
       "tags": [],
       "implicitDependencies": ["admin"]
     },
+    "attendees": {
+      "tags": []
+    },
+    "bookings": {
+      "tags": []
+    },
     "fabrikam": {
       "tags": []
     },
     "fabrikam-e2e": {
       "tags": [],
       "implicitDependencies": ["fabrikam"]
+    },
+    "trainings": {
+      "tags": []
     },
     "ui": {
       "tags": []

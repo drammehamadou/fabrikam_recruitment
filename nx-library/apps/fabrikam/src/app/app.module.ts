@@ -7,6 +7,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { TrainingListComponent } from './components/training-list/training-list.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { UiModule } from '@nx-library/ui';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -15,7 +16,9 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AppComponent, LandingComponent, TrainingListComponent, HeaderComponent, FooterComponent],
-  imports: [BrowserModule, RouterModule.forRoot(routes)],
+  imports: [BrowserModule, 
+            RouterModule.forRoot(routes),
+            UiModule],
   providers: [],
   bootstrap: [AppComponent],
 })

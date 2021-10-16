@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@nx-library/attendees": ["libs/attendees/src/index.ts"],
+      "@nx-library/bookings": ["libs/bookings/src/index.ts"],
+      "@nx-library/trainings": ["libs/trainings/src/index.ts"],
       "@nx-library/ui": ["libs/ui/src/index.ts"]
     }
   },

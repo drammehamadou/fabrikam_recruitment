@@ -40,6 +40,9 @@
     "fabrikam-e2e": {
       "tags": [],
       "implicitDependencies": ["fabrikam"]
+    },
+    "ui": {
+      "tags": []
     }
   }
 }

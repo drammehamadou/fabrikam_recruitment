@@ -1,4 +1,21 @@
+@import '~normalize.css/normalize.css';
 @import './base/colors.scss';
 @import './base/fonts.scss';
 @import './base/mixins.scss';
 @import './base/configuration.scss';
+
+//Libraries
+@import '~primeicons/primeicons.css';
+@import '~primeng/resources/themes/saga-blue/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeflex/primeflex.scss';
+
+//Shared
+@import './apps/admin/shell.scss';
+
+//Pages
+@import './apps/fabrikam/components/landing.scss';
+@import './apps/fabrikam/components/trainings-list.scss';
+
+//Libs
+@import './libs/trainings/training-item.scss';

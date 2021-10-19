@@ -12,12 +12,20 @@ export class CoursesService {
 
   }
 
+  getCourse(courseId : string): Observable<Course> {
+    return this.http.get<Course>(`http://localhost:2021/api/v1/courses/${courseId}`)
+  }
+
   getCourses(): Observable<Course[]> {
     return this.http.get<Course[]>('http://localhost:2021/api/v1/courses/')
   }
 
   createCourse(course: Course): Observable<Course>  {
     return this.http.post<Course>('http://localhost:2021/api/v1/courses/', course)
+  }
+
+  updateCourse(course: Course): Observable<Course>  {
+    return this.http.put<Course>('http://localhost:2021/api/v1/courses/' + course.id, course)
   }
 
   deleteCourse(courseId: string): Observable<Object> {

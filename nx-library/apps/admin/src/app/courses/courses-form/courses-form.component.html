@@ -1,17 +1,7 @@
 <p-toast></p-toast>
 <div class="admin-page">
-    <p-card header="Add Course" subheader="Add or edit courses">
-        <p-toolbar>
-            <ng-template pTemplate="left">
-                <button pButton pRipple label="Create" icon="pi pi-plus" 
-                class="p-button-primary" (click)="onSubmit()"></button>
-            </ng-template>
-    
-            <ng-template pTemplate="right">
-                <button pButton pRipple label="Cancel" icon="pi pi-arrow-circle-left" class="p-button-secondary"></button>
-            </ng-template>
-        </p-toolbar>
-    <br>
+    <p-card [header]="editmode ? 'Edit Course' : 'Add Course'"
+    subheader="You can add or edit courses here">
     <form [formGroup]="form">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col">
@@ -29,5 +19,19 @@
             </div>
         </div>
     </form>
+    <br>
+    <p-toolbar>
+        <ng-template pTemplate="left">
+            <button pButton pRipple 
+            [label]="editmode ? 'Update' : 'Create'" 
+            icon="pi pi-plus" 
+            class="p-button-primary" 
+            (click)="onSubmit()"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button pButton pRipple label="Cancel" icon="pi pi-arrow-circle-left" class="p-button-secondary"></button>
+        </ng-template>
+    </p-toolbar>
     </p-card>
 </div>

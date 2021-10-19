@@ -24,9 +24,11 @@
                         <td>{{course.name}}</td>
                         <td>{{course.icon}}</td>
                         <td>
-                            <button pButton pRipple icon="pi pi-pencil" 
+                            <button pButton pRipple 
+                            icon="pi pi-pencil" 
                             class="p-button-rounded p-button-warning p-mr-2"
-                            pTooltip="Edit {{course.name}}"></button>
+                            pTooltip="Edit {{course.name}}"
+                            (click)="updateCourse(course.id)"></button>
                         </td>
                         <td>
                             <button pButton 

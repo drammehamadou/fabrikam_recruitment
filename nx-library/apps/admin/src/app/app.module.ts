@@ -37,6 +37,9 @@ const routes: Routes = [
           },
           {
             path: 'courses/form', component: CoursesFormComponent
+          },
+          {
+            path: 'courses/form/:id', component: CoursesFormComponent
           }
   ]}
 ]

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Course, CoursesService } from '@nx-library/trainings';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -13,7 +14,8 @@ courses: Course[] = [];
 
   constructor(private coursesService: CoursesService,
               private messageService: MessageService,
-              private confirmationService: ConfirmationService) { }
+              private confirmationService: ConfirmationService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this._getCourses()
@@ -45,6 +47,10 @@ courses: Course[] = [];
       reject: () => {
       }
   });
+  }
+
+  updateCourse(courseId: string) {
+    this.router.navigateByUrl(`courses/form/${courseId}`)
   }
 
   private _getCourses() {

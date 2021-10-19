@@ -2,7 +2,8 @@
     <p-card header="Add Course" subheader="Add or edit courses">
         <p-toolbar>
             <ng-template pTemplate="left">
-                <button pButton pRipple label="Create" icon="pi pi-plus" class="p-button-primary"></button>
+                <button pButton pRipple label="Create" icon="pi pi-plus" 
+                class="p-button-primary" (click)="onSubmit()"></button>
             </ng-template>
     
             <ng-template pTemplate="right">
@@ -10,16 +11,20 @@
             </ng-template>
         </p-toolbar>
     <br>
-    <form>
+    <form [formGroup]="form">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col">
                 <label for="name">Name</label>
-                <input id="name" type="text" pInputText> 
+                <input formControlName="name" id="name" type="text" pInputText> 
+            <small *ngIf="courseForm.name.invalid && isSubmitted" 
+            class="p-error">Name is required</small>
             </div>
             <br>
             <div class="p-field p-col">
                 <label for="icon">Icon</label>
-                <input id="icon" type="text" pInputText> 
+                <input formControlName="icon" id="icon" type="text" pInputText> 
+                <small *ngIf="courseForm.icon.invalid && isSubmitted" 
+                class="p-error">Icon is required</small>
             </div>
         </div>
     </form>

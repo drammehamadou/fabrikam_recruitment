@@ -17,6 +17,9 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
 import {ToastModule} from 'primeng/toast';
+import {TooltipModule} from 'primeng/tooltip';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 import { CoursesService } from '@nx-library/trainings';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -56,10 +59,12 @@ const routes: Routes = [
     TableModule,
     InputTextModule,
     ToastModule,
+    TooltipModule,
+    ConfirmDialogModule,
     RouterModule.forRoot(routes, 
       { initialNavigation: 'enabled' }),
   ],
-  providers: [CoursesService, MessageService],
+  providers: [CoursesService, MessageService, ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

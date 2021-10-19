@@ -19,4 +19,8 @@ export class CoursesService {
   createCourse(course: Course): Observable<Course>  {
     return this.http.post<Course>('http://localhost:2021/api/v1/courses/', course)
   }
+
+  deleteCourse(courseId: string): Observable<Object> {
+    return this.http.delete<Object>(`http://localhost:2021/api/v1/courses/${courseId}`)
+  }
 }

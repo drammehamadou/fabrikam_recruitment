@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="admin-page">
     <p-card header="Courses" subheader="List of all courses">
             <p-toolbar>
@@ -13,6 +14,8 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Icon</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-course>
@@ -20,8 +23,22 @@
                         <td>{{course.id}}</td>
                         <td>{{course.name}}</td>
                         <td>{{course.icon}}</td>
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil" 
+                            class="p-button-rounded p-button-warning p-mr-2"
+                            pTooltip="Edit {{course.name}}"></button>
+                        </td>
+                        <td>
+                            <button pButton 
+                            pRipple icon="pi pi-trash" 
+                            (click)="deleteCourse(course.id)"
+                            pTooltip="Delete {{course.name}}"
+                            class="p-button-rounded p-button-danger"></button>
+                        </td>
+
                     </tr>
                 </ng-template>
             </p-table>
     </p-card>
 </div>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

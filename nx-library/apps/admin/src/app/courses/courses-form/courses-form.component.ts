@@ -40,10 +40,16 @@ export class CoursesFormComponent implements OnInit {
     }
     this.coursesService.createCourse(course)
     .subscribe(Response => {
-      this.messageService.add({severity:'success', summary:'Success', detail:'Course successfully created.'});
+      this.messageService.add({
+        severity:'success', 
+        summary:'Success', 
+        detail:'Course successfully created.'});
     },
     (error) => {
-      this.messageService.add({severity:'error', summary:'Error', detail:'Course is not created.'});
+      this.messageService.add({
+        severity:'error', 
+        summary:'Error', 
+        detail:'Course is not created.'});
     });
     timer(2000).toPromise().then(done => {
       this.location.back();

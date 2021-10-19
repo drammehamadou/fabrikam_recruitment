@@ -1,17 +1,12 @@
 <div class="admin-page">
     <p-card header="Courses" subheader="List of all courses">
-    <div class="grid">
-        <div class="p-col-12">
             <p-toolbar>
                 <div class="p-toolbar-group-left">
-                    <p-button styleClass="p-button-success" label="New" icon="pi pi-plus"></p-button>
+                    <p-button styleClass="p-button-success" label="New" icon="pi pi-plus"
+                    routerLink="form"></p-button>
                 </div>
             </p-toolbar>
-        </div>
-    </div>
     <br>
-    <div class="grid">
-        <div class="p-col-12">
             <p-table [value]="courses" responsiveLayout="scroll" styleClass="p-datatable-gridlines">
                 <ng-template pTemplate="header">
                     <tr>
@@ -28,7 +23,5 @@
                     </tr>
                 </ng-template>
             </p-table>
-        </div>
-    </div>
     </p-card>
 </div>

@@ -8,12 +8,16 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
+import { CoursesFormComponent } from './courses/courses-form/courses-form.component';
 
 import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {ToolbarModule} from 'primeng/toolbar';
 import {TableModule} from 'primeng/table';
+import {InputTextModule} from 'primeng/inputtext';
+
 import { CoursesService } from '@nx-library/trainings';
+
 
 const routes: Routes = [
   { path: '', component: ShellComponent,
@@ -23,6 +27,9 @@ const routes: Routes = [
           },
           {
             path: 'courses', component: CoursesListComponent
+          },
+          {
+            path: 'courses/form', component: CoursesFormComponent
           }
   ]}
 ]
@@ -32,7 +39,7 @@ const routes: Routes = [
     AppComponent, 
     DashboardComponent, 
     ShellComponent, 
-    SidebarComponent, CoursesListComponent],
+    SidebarComponent, CoursesListComponent, CoursesFormComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -40,6 +47,7 @@ const routes: Routes = [
     ButtonModule,
     ToolbarModule,
     TableModule,
+    InputTextModule,
     RouterModule.forRoot(routes, 
       { initialNavigation: 'enabled' }),
   ],

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Course, CoursesService } from '@nx-library/trainings';
 
 @Component({
   selector: 'nx-library-courses-list',
@@ -7,26 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesListComponent implements OnInit {
 
-  courses = [
-    {
-      id:1,
-      name: 'course-1',
-      icon: 'icon-1'
-    },
-    {
-      id:1,
-      name: 'course-2',
-      icon: 'icon-2'
-    },
-    {
-      id:1,
-      name: 'course-3',
-      icon: 'icon-3'
-    }
-  ]
-  constructor() { }
+courses: Course[] = [];
+
+  constructor(private coursesService: CoursesService) { }
 
   ngOnInit(): void {
+    this.coursesService.getCourses().subscribe(cous => {
+      this.courses = cous;
+    });
   }
 
 }

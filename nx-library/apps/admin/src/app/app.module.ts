@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ShellComponent } from './shared/shell/shell.component';
@@ -15,9 +16,11 @@ import {ButtonModule} from 'primeng/button';
 import {ToolbarModule} from 'primeng/toolbar';
 import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
+import {ToastModule} from 'primeng/toast';
 
 import { CoursesService } from '@nx-library/trainings';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 
 
 const routes: Routes = [
@@ -43,6 +46,7 @@ const routes: Routes = [
     SidebarComponent, CoursesListComponent, CoursesFormComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -51,10 +55,11 @@ const routes: Routes = [
     ToolbarModule,
     TableModule,
     InputTextModule,
+    ToastModule,
     RouterModule.forRoot(routes, 
       { initialNavigation: 'enabled' }),
   ],
-  providers: [CoursesService],
+  providers: [CoursesService, MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

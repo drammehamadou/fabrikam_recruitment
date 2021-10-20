@@ -7,14 +7,14 @@ import { MessageService } from 'primeng/api';
 import { timer } from 'rxjs';
 
 @Component({
-  selector: 'nx-library-courses-form',
+  selector: 'admin-courses-form',
   templateUrl: './courses-form.component.html',
   styleUrls: ['./courses-form.component.scss']
 })
 export class CoursesFormComponent implements OnInit {
 
   form!: FormGroup;
-  isSubmitted: boolean = false;
+  isSubmitted = false;
   editmode = false;
   currentCourseId! : string;
 

@@ -4,7 +4,7 @@ import { Course, CoursesService } from '@nx-library/trainings';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'nx-library-courses-list',
+  selector: 'admin-courses-list',
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.css']
 })
@@ -29,14 +29,14 @@ courses: Course[] = [];
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.coursesService.deleteCourse(courseId).subscribe
-        ((Response) => {
+        (() => {
           this._getCourses();
           this.messageService.add({
             severity:'success', 
             summary:'Success', 
             detail:'Course successfully deleted.'});
         },
-        (error) => {
+        () => {
           this.messageService.add({
             severity:'error', 
             summary:'Error', 
@@ -44,8 +44,6 @@ courses: Course[] = [];
           });
         })
       },
-      reject: () => {
-      }
   });
   }
 

@@ -17,24 +17,35 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th>#</th>
+                        <th>Id</th>
+                        <th>Description</th>
                         <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
                         <th>Image</th>
                         <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-                        <th pSortableColumn="countInTraining">Availability <p-sortIcon field="countInTraining"></p-sortIcon></th>
                         <th pSortableColumn="course">Course <p-sortIcon field="course"></p-sortIcon></th>
+                        <th pSortableColumn="countInTraining">Availability <p-sortIcon field="countInTraining"></p-sortIcon></th>
+                        <th>Rating</th>
+                        <th>Review</th>
+                        <th>Featured</th>
                         <th pSortableColumn="dateCreated">Date Created <p-sortIcon field="dateCreated"></p-sortIcon></th>
-                        <th>Actions</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-training>
+                <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
                     <tr>
-                        <td></td>
+                        <td>{{rowIndex + 1}}</td>
+                        <td>{{training.id }}</td>
+                        <td>{{training.description }}</td>
                         <td>{{training.title}}</td>
                         <td>{{training.image}}</td>
                         <td>{{training.price}}</td>
-                        <td>{{training.countInTraining}}</td>
                         <td>{{training.course}}</td>
-                        <td>{{training.dateCreated}}</td>
+                        <td>{{training.countInTraining}}</td>
+                        <td>{{training.rating}}</td>
+                        <td>{{training.review}}</td>
+                        <td>{{training.isFeatured}}</td>
+                        <td>{{training.dateCreated | date: 'short'}}</td>
                         <td>
                             <button pButton pRipple 
                             icon="pi pi-pencil" 

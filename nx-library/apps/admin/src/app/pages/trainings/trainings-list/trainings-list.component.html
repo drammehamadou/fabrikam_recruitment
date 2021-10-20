@@ -1,0 +1,59 @@
+<p-toast></p-toast>
+<div class="admin-page">
+    <p-card header="Trainings" subheader="List of all trainings">
+            <p-toolbar>
+                <div class="p-toolbar-group-left">
+                    <p-button 
+                    styleClass="p-button-success" 
+                    label="New" 
+                    icon="pi pi-plus"
+                    routerLink="form"></p-button>
+                </div>
+            </p-toolbar>
+    <br>
+            <p-table [value]="trainings" 
+                    responsiveLayout="scroll" 
+                    styleClass="p-datatable-gridlines">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>#</th>
+                        <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
+                        <th>Image</th>
+                        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+                        <th pSortableColumn="countInTraining">Availability <p-sortIcon field="countInTraining"></p-sortIcon></th>
+                        <th pSortableColumn="course">Course <p-sortIcon field="course"></p-sortIcon></th>
+                        <th pSortableColumn="dateCreated">Date Created <p-sortIcon field="dateCreated"></p-sortIcon></th>
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-training>
+                    <tr>
+                        <td></td>
+                        <td>{{training.title}}</td>
+                        <td>{{training.image}}</td>
+                        <td>{{training.price}}</td>
+                        <td>{{training.countInTraining}}</td>
+                        <td>{{training.course}}</td>
+                        <td>{{training.dateCreated}}</td>
+                        <td>
+                            <button pButton pRipple 
+                            icon="pi pi-pencil" 
+                            class="p-button-rounded p-button-warning p-mr-2"
+                            pTooltip="Edit {{training.title}}"
+                            ></button>
+                        </td>
+                        <td>
+                            <button pButton 
+                            pRipple icon="pi pi-trash" 
+                            
+                            pTooltip="Delete {{training.title}}"
+                            class="p-button-rounded p-button-danger"></button>
+                        </td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+    </p-card>
+</div>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+

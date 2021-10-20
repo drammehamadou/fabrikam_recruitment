@@ -20,6 +20,7 @@ import {ToastModule} from 'primeng/toast';
 import {TooltipModule} from 'primeng/tooltip';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
+import {ColorPickerModule} from 'primeng/colorpicker';
 
 import { CoursesService } from '@nx-library/trainings';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -64,6 +65,7 @@ const routes: Routes = [
     ToastModule,
     TooltipModule,
     ConfirmDialogModule,
+    ColorPickerModule,
     RouterModule.forRoot(routes, 
       { initialNavigation: 'enabled' }),
   ],

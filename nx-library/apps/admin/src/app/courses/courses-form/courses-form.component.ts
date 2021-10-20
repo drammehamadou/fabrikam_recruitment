@@ -27,7 +27,8 @@ export class CoursesFormComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       name:['', Validators.required],
-      icon:['', Validators.required]
+      icon:['', Validators.required],
+      color: ['#fff']
     })
 
     this._checkEditMode();
@@ -44,6 +45,7 @@ export class CoursesFormComponent implements OnInit {
       id: this.currentCourseId,
       name: this.courseForm.name.value,
       icon: this.courseForm.icon.value,
+      color: this.courseForm.color.value
     }
     if(this.editmode) {
       this._updateCourse(course)
@@ -108,6 +110,7 @@ export class CoursesFormComponent implements OnInit {
         this.coursesService.getCourse(params.id).subscribe(course => {
           this.courseForm.name.setValue(course.name);
           this.courseForm.icon.setValue(course.icon);
+          this.courseForm.color.setValue(course.color);
         })
       }
     })

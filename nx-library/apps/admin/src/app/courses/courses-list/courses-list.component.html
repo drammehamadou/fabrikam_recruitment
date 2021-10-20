@@ -24,7 +24,13 @@
                         <td>{{course.id}}</td>
                         <td><i class="pi" [ngClass]="'pi-' + course.icon"></i></td>
                         <td>{{course.name}}</td>
-                        <td>{{course.color}}</td>
+                        <td>
+                            <i
+                             class="pi pi-circle-on"
+                             style="font-size: 2rem"
+                             [ngStyle]="{ color: course.color }"
+                            ></i>
+                           </td>
                         <td>
                             <button pButton pRipple 
                             icon="pi pi-pencil" 

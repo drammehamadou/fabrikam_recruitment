@@ -1,1 +1,86 @@
-<p>trainings-form works!</p>
+<p-toast></p-toast>
+<div class="admin-page">
+    <p-card [header]="editmode ? 'Edit Training' : 'Add Training'"
+    subheader="You can add or edit trainings here">
+    <div class="p-grid">
+        <div class="p-col-12">
+    <form [formGroup]="form">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="title">Title</label>
+                <input formControlName="title" 
+                id="title" type="text" pInputText> 
+            <small *ngIf="trainingForm.title.invalid && isSubmitted" 
+            class="p-error">Title is required</small>
+            </div>
+            <br>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col">
+                    <label for="course">Course</label>
+                    <p-dropdown [options]="courses" [(ngModel)]="selectedCourse" optionLabel="title"></p-dropdown>
+                    <small *ngIf="trainingForm.course.invalid && isSubmitted" 
+                    class="p-error">Course is required</small>
+                </div>
+            </div>
+            <br>
+            <div class="p-field p-col-4">
+                <label for="price">Price</label>
+                <p-inputNumber 
+                formControlName="price" 
+                mode="decimal" 
+                inputId="price" [useGrouping]="false">
+                </p-inputNumber>
+                <small *ngIf="trainingForm.price.invalid && isSubmitted" 
+                class="p-error">Price is required</small>
+            </div>
+        </div>
+        <br>
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-4">
+                <label for="countInTraining">Total number of space Availability</label>
+                <p-inputNumber 
+                formControlName="countInTraining" 
+                mode="decimal" 
+                inputId="countInTraining" [useGrouping]="false">
+                </p-inputNumber>
+                <small *ngIf="trainingForm.countInTraining.invalid && isSubmitted" 
+                class="p-error">Total Availability is required</small>
+            </div>
+            <br>
+            <div class="p-field p-col-4">
+                <label for="countInTraining">Is Featured</label>
+                <p-inputSwitch formControlName="isFeatured" id="isFeatured"></p-inputSwitch>
+            </div>
+            <br>
+            <div class="p-field p-col">
+                <label for="description">Description</label>
+                <textarea formControlName="description" id="description"
+                rows="6" cols="30" pInputTextarea></textarea>
+                <small *ngIf="trainingForm.description.invalid && isSubmitted" 
+                class="p-error">Description is required</small>
+            </div>
+        </div>
+    </form>
+    </div>
+    </div>
+    <br>
+    <p-toolbar>
+        <ng-template pTemplate="left">
+            <button pButton pRipple 
+            [label]="editmode ? 'Update' : 'Create'" 
+            icon="pi pi-plus" 
+            class="p-button-primary" 
+            (click)="onSubmit()"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <button pButton pRipple 
+            label="Cancel" 
+            icon="pi pi-arrow-circle-left" 
+            class="p-button-secondary"
+            routerLink="/courses"></button>
+        </ng-template>
+    </p-toolbar>
+    </p-card>
+</div>
+

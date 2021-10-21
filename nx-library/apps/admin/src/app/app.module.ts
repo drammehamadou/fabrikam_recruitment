@@ -10,6 +10,8 @@ import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { CoursesListComponent } from './pages/courses/courses-list/courses-list.component';
 import { CoursesFormComponent } from './pages/courses/courses-form/courses-form.component';
+import { TrainingsListComponent } from './pages/trainings/trainings-list/trainings-list.component';
+import { TrainingsFormComponent } from './pages/trainings/trainings-form/trainings-form.component';
 
 import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
@@ -21,13 +23,14 @@ import {TooltipModule} from 'primeng/tooltip';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {ColorPickerModule} from 'primeng/colorpicker';
+import { InputNumberModule } from 'primeng/inputnumber';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 import { CoursesService } from '@nx-library/trainings';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { TrainingsListComponent } from './pages/trainings/trainings-list/trainings-list.component';
-import { TrainingsFormComponent } from './pages/trainings/trainings-form/trainings-form.component';
-
 
 const routes: Routes = [
   { path: '', component: ShellComponent,
@@ -47,7 +50,11 @@ const routes: Routes = [
     AppComponent, 
     DashboardComponent, 
     ShellComponent, 
-    SidebarComponent, CoursesListComponent, CoursesFormComponent, TrainingsListComponent, TrainingsFormComponent],
+    SidebarComponent, 
+    CoursesListComponent, 
+    CoursesFormComponent, 
+    TrainingsListComponent, 
+    TrainingsFormComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -63,6 +70,10 @@ const routes: Routes = [
     TooltipModule,
     ConfirmDialogModule,
     ColorPickerModule,
+    InputNumberModule,
+    InputTextareaModule,
+    DropdownModule,
+    InputSwitchModule,
     RouterModule.forRoot(routes, 
       { initialNavigation: 'enabled' }),
   ],

@@ -11,6 +11,7 @@
             <p-table [value]="courses" responsiveLayout="scroll" styleClass="p-datatable-gridlines">
                 <ng-template pTemplate="header">
                     <tr>
+                        <th>#</th>
                         <th>Id</th>
                         <th>Icon</th>
                         <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
@@ -19,8 +20,9 @@
                         <th>Delete</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-course>
+                <ng-template pTemplate="body" let-course let-rowIndex="rowIndex">
                     <tr>
+                        <td>{{rowIndex + 1}}</td>
                         <td>{{course.id}}</td>
                         <td><i class="pi" [ngClass]="'pi-' + course.icon"></i></td>
                         <td>{{course.name}}</td>

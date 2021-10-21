@@ -17,7 +17,12 @@
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col">
                     <label for="course">Course</label>
-                    <p-dropdown [options]="courses" [(ngModel)]="selectedCourse" optionLabel="title"></p-dropdown>
+                    <p-dropdown [options]="courses" 
+                    formControlName="course" 
+                    optionLabel="title"
+                    [filter]="true" filterBy="name" 
+                    [showClear]="true" 
+                    placeholder="Select a Course"></p-dropdown>
                     <small *ngIf="trainingForm.course.invalid && isSubmitted" 
                     class="p-error">Course is required</small>
                 </div>
@@ -53,9 +58,10 @@
             </div>
             <br>
             <div class="p-field p-col">
-                <label for="description">Description</label>
-                <textarea formControlName="description" id="description"
-                rows="6" cols="30" pInputTextarea></textarea>
+                <label for="description">Training Details</label>
+                <br>
+                <p-editor formControlName="description" id="description"
+                [style]="{'height':'320px'}"></p-editor>
                 <small *ngIf="trainingForm.description.invalid && isSubmitted" 
                 class="p-error">Description is required</small>
             </div>
@@ -78,6 +84,7 @@
             label="Cancel" 
             icon="pi pi-arrow-circle-left" 
             class="p-button-secondary"
+            (click)="onCancel()"
             routerLink="/courses"></button>
         </ng-template>
     </p-toolbar>

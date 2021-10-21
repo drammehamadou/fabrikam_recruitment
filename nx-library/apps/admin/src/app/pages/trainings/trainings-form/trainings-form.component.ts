@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-interface Course {
-  title: string
-}
+import { Course, CoursesService } from '@nx-library/trainings';
 
 @Component({
   selector: 'admin-trainings-form',
@@ -13,27 +10,19 @@ interface Course {
 export class TrainingsFormComponent implements OnInit {
 
   editmode : false;
-  form: FormGroup;
+  form!: FormGroup;
   isSubmitted = false;
 
-  //to be deleted
   courses : Course[] = [];
-  selectedCourse!: Course;
 
-  constructor(private formBuilder: FormBuilder) { 
-    this.courses = [
-      {title: 'CV writing'},
-      {title: 'Presentation'},
-      {title: 'IT skills'},
-      {title: 'Health and safety'},
-      {title: 'Customer care'},
-      {title: 'Project management'},
-      
-  ];
+  constructor(private formBuilder: FormBuilder,
+              private coursesService: CoursesService) { 
+    
   }
 
   ngOnInit(): void {
     this._initForm();
+    this._getCourses()
   }
 
   //initialize the form
@@ -49,10 +38,22 @@ export class TrainingsFormComponent implements OnInit {
     })
   }
 
+  private _getCourses() {
+    this.coursesService.getCourses().subscribe(courses => {
+      this.courses = courses;
+    });
+  }
+
   get trainingForm() {
     return this.form.controls;
   }
 
-  onSubmit() {}
+  onSubmit() {
+    
+  }
+
+  onCancel() {
+
+  }
 
 }

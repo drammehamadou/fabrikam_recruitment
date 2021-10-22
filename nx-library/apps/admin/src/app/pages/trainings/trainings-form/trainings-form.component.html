@@ -65,6 +65,23 @@
                 <small *ngIf="trainingForm.description.invalid && isSubmitted" 
                 class="p-error">Description is required</small>
             </div>
+            <br>
+            <div class="p-field p-col-12">
+                <label for="name">Main Image</label>
+                <br>
+                <input
+                  type="file"
+                  class="p-inputtext"
+                  accept="image/*"
+                  (change)="onImageUpload($event)"
+                />
+                <small *ngIf="trainingForm.image.invalid && isSubmitted" class="p-error"
+                  >Image is required</small
+                >
+                <div class="p-col-2 p-mt-2 p-pl-0">
+                  <img style="width: 100%" [src]="imageDisplay" alt="" />
+                </div>
+              </div>
         </div>
     </form>
     </div>

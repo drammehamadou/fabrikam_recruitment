@@ -1,3 +1,4 @@
+import { ReadVarExpr } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Course, CoursesService } from '@nx-library/trainings';
@@ -9,9 +10,10 @@ import { Course, CoursesService } from '@nx-library/trainings';
 })
 export class TrainingsFormComponent implements OnInit {
 
-  editmode : false;
+  editmode! : false;
   form!: FormGroup;
   isSubmitted = false;
+  imageDisplay: string | ArrayBuffer;
 
   courses : Course[] = [];
 
@@ -49,11 +51,25 @@ export class TrainingsFormComponent implements OnInit {
   }
 
   onSubmit() {
-    
+
   }
 
   onCancel() {
 
+  }
+
+  onImageUpload(event: any) {
+    console.log(event);
+    const file = event.target.files[0];
+    if (file) {
+      // this.form.patchValue({ image: file });
+      // this.form.get('image').updateValueAndValidity();
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        this.imageDisplay = fileReader.result;
+      };
+      fileReader.readAsDataURL(file);
+    }
   }
 
 }

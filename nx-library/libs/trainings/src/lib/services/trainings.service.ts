@@ -8,27 +8,27 @@ import { Training } from '../models/training';
   providedIn: 'root'
 })
 export class TrainingsService {
-  apiURLCourses = environment.apiUrl + 'trainings';
+  apiURLTrainings = environment.apiUrl + 'trainings';
 
   constructor(private http: HttpClient) {}
 
   getTrainings(): Observable<Training[]> {
-    return this.http.get<Training[]>(this.apiURLCourses);
+    return this.http.get<Training[]>(this.apiURLTrainings);
   }
 
-//   createTraining(trainingData: FormData): Observable<Training> {
-//     return this.http.post<Training>(this.apiURLTrainings, trainingData);
-//   }
+  createTraining(trainingData: FormData): Observable<Training> {
+    return this.http.post<Training>(this.apiURLTrainings, trainingData);
+  }
 
-//   getTraining(trainingId: string): Observable<Training> {
-//     return this.http.get<Training>(`${this.apiURLTrainings}/${trainingId}`);
-//   }
+  getTraining(trainingId: string): Observable<Training> {
+    return this.http.get<Training>(`${this.apiURLTrainings}/${trainingId}`);
+  }
 
-//   updateTraining(trainingData: FormData, trainingid: string): Observable<Training> {
-//     return this.http.put<Training>(`${this.apiURLTrainings}/${trainingid}`, trainingData);
-//   }
+  updateTraining(trainingData: FormData, trainingid: string): Observable<Training> {
+    return this.http.put<Training>(`${this.apiURLTrainings}/${trainingid}`, trainingData);
+  }
 
-//   deleteTraining(trainingId: string): Observable<any> {
-//     return this.http.delete<any>(`${this.apiURLTrainings}/${trainingId}`);
-//   }
+  deleteTraining(trainingId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiURLTrainings}/${trainingId}`);
+  }
 }

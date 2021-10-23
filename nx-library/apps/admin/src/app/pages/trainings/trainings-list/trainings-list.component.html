@@ -1,6 +1,7 @@
 <p-toast></p-toast>
 <div class="admin-page">
-    <p-card header="Trainings" subheader="List of all trainings">
+    <p-card 
+    header="Trainings" subheader="List of all trainings">
             <p-toolbar>
                 <div class="p-toolbar-group-left">
                     <p-button 
@@ -11,15 +12,20 @@
                 </div>
             </p-toolbar>
     <br>
-            <p-table [value]="trainings" 
-                    responsiveLayout="scroll" 
-                    styleClass="p-datatable-gridlines">
+    <div class="p-grid">
+        <div class="p-col-12">
+            <p-table 
+            [paginator]="true"
+          [rows]="10"
+            [value]="trainings"  
+                    styleClass="p-datatable-gridlines"
+                    [globalFilterFields]="['name']">
                 <ng-template pTemplate="header">
                     <tr>
                         <th>#</th>
                         <th>Id</th>
+                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
                         <th>Description</th>
-                        <th pSortableColumn="title">Title <p-sortIcon field="title"></p-sortIcon></th>
                         <th>Image</th>
                         <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
                         <th pSortableColumn="course">Course <p-sortIcon field="course"></p-sortIcon></th>
@@ -36,34 +42,36 @@
                     <tr>
                         <td>{{rowIndex + 1}}</td>
                         <td>{{training.id }}</td>
+                        <td>{{training.name}}</td>
                         <td>{{training.description }}</td>
-                        <td>{{training.title}}</td>
                         <td><img [src]="training.image" style="width: 100%" alt="img" /></td>
                         <td>{{training.price}}</td>
-                        <td>{{training.course}}</td>
+                        <td>{{training.course.name}}</td>
                         <td>{{training.countInTraining}}</td>
                         <td>{{training.rating}}</td>
-                        <td>{{training.review}}</td>
+                        <td>{{training.reviews}}</td>
                         <td>{{training.isFeatured}}</td>
                         <td>{{training.dateCreated | date: 'short'}}</td>
                         <td>
                             <button pButton pRipple 
                             icon="pi pi-pencil" 
                             class="p-button-rounded p-button-warning p-mr-2"
-                            pTooltip="Edit {{training.title}}"
+                            pTooltip="Edit {{training.name}}"
                             ></button>
                         </td>
                         <td>
                             <button pButton 
                             pRipple icon="pi pi-trash" 
                             
-                            pTooltip="Delete {{training.title}}"
+                            pTooltip="Delete {{training.name}}"
                             class="p-button-rounded p-button-danger"></button>
                         </td>
 
                     </tr>
                 </ng-template>
             </p-table>
+            </div>
+            </div>
     </p-card>
 </div>
 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>

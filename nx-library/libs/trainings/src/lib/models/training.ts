@@ -2,7 +2,7 @@ import { Course } from './course';
 
 export class Training {
   id?: string;
-  title?: string;
+  name?: string;
   description?: string;
   image?: string;
   images?: string[];

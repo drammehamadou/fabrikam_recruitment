@@ -44,7 +44,7 @@ router.post(`/`, uploadOptions.single('image'), async (req, res) => {
     const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
 
     let training = new Training ({
-        title: req.body.title,
+        name: req.body.name,
         description: req.body.description,
         image: `${basePath}${fileName}`,
         price: req.body.price,
@@ -113,7 +113,7 @@ router.put(`/:id`, uploadOptions.single('image'), async (req, res) => {
     const updatedTraining = await Training.findByIdAndUpdate(
         req.params.id, 
         {
-            title: req.body.title,
+            name: req.body.name,
             description: req.body.description,
             image: imagepath,
             price: req.body.price,

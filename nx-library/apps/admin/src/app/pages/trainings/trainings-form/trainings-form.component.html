@@ -1,32 +1,36 @@
 <p-toast></p-toast>
 <div class="admin-page">
-    <p-card [header]="editmode ? 'Edit Training' : 'Add Training'"
+    <p-card 
+    [header]="editmode ? 'Edit Training' : 'Add Training'"
     subheader="You can add or edit trainings here">
     <div class="p-grid">
         <div class="p-col-12">
     <form [formGroup]="form">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col">
-                <label for="title">Title</label>
-                <input formControlName="title" 
-                id="title" type="text" pInputText> 
-            <small *ngIf="trainingForm.title.invalid && isSubmitted" 
-            class="p-error">Title is required</small>
+                <label for="name">Name</label>
+                <input formControlName="name" 
+                id="name" type="text" pInputText> 
+            <small *ngIf="trainingForm.name.invalid && isSubmitted" 
+            class="p-error">Name is required</small>
             </div>
             <br>
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col">
+            <!-- <div class="p-fluid p-formgrid p-grid"> -->
+                <div class="p-field p-col-4">
                     <label for="course">Course</label>
-                    <p-dropdown [options]="courses" 
+                    <p-dropdown 
+                    [options]="courses" 
                     formControlName="course" 
-                    optionLabel="title"
-                    [filter]="true" filterBy="name" 
+                    optionLabel="name"
+                    optionValue="id"
+                    [filter]="true" 
+                    filterBy="name" 
                     [showClear]="true" 
                     placeholder="Select a Course"></p-dropdown>
                     <small *ngIf="trainingForm.course.invalid && isSubmitted" 
                     class="p-error">Course is required</small>
                 </div>
-            </div>
+            <!-- </div> -->
             <br>
             <div class="p-field p-col-4">
                 <label for="price">Price</label>
@@ -87,6 +91,8 @@
     </div>
     </div>
     <br>
+    <div class="p-grid p-mb-5">
+        <div class="p-col-12">
     <p-toolbar>
         <ng-template pTemplate="left">
             <button pButton pRipple 
@@ -105,6 +111,8 @@
             routerLink="/courses"></button>
         </ng-template>
     </p-toolbar>
+    </div>
+    </div>
     </p-card>
 </div>
 

@@ -8,7 +8,11 @@
                 </div>
             </p-toolbar>
     <br>
-            <p-table [value]="courses" responsiveLayout="scroll" styleClass="p-datatable-gridlines">
+            <p-table [value]="courses" 
+            responsiveLayout="scroll" 
+            [paginator]="true"
+          [rows]="10"
+            styleClass="p-datatable-gridlines">
                 <ng-template pTemplate="header">
                     <tr>
                         <th>#</th>

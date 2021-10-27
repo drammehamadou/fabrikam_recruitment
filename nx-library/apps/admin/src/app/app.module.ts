@@ -28,10 +28,15 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {EditorModule} from 'primeng/editor';
+import { TagModule } from 'primeng/tag';
 
 import { CoursesService } from '@nx-library/trainings';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { AttendeesFormComponent } from './pages/attendees/attendees-form/attendees-form.component';
+import { AttendeesListComponent } from './pages/attendees/attendees-list/attendees-list.component';
+import { BookingsFormComponent } from './pages/bookings/bookings-form/bookings-form.component';
+import { BookingsListComponent } from './pages/bookings/bookings-list/bookings-list.component';
 
 const routes: Routes = [
   { path: '', component: ShellComponent,
@@ -42,7 +47,13 @@ const routes: Routes = [
           { path: 'courses/form/:id', component: CoursesFormComponent },
           { path: 'trainings', component: TrainingsListComponent },
           { path: 'trainings/form', component: TrainingsFormComponent },
-          { path: 'trainings/form/:id', component: TrainingsFormComponent }
+          { path: 'trainings/form/:id', component: TrainingsFormComponent },
+          { path: 'attendees', component: AttendeesListComponent },
+          { path: 'attendees/form', component: AttendeesFormComponent },
+          { path: 'attendees/form/:id', component: AttendeesFormComponent },
+          { path: 'bookings', component: BookingsListComponent },
+          { path: 'bookings/form', component: BookingsFormComponent },
+          { path: 'bookings/form/:id', component: BookingsFormComponent }
   ]}
 ]
 
@@ -55,7 +66,7 @@ const routes: Routes = [
     CoursesListComponent, 
     CoursesFormComponent, 
     TrainingsListComponent, 
-    TrainingsFormComponent],
+    TrainingsFormComponent, AttendeesFormComponent, AttendeesListComponent, BookingsFormComponent, BookingsListComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -76,6 +87,7 @@ const routes: Routes = [
     DropdownModule,
     InputSwitchModule,
     EditorModule,
+    TagModule,
     RouterModule.forRoot(routes, 
       { initialNavigation: 'enabled' }),
   ],

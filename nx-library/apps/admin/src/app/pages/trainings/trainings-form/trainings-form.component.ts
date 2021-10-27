@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Course, CoursesService, Training, TrainingsService } from '@nx-library/trainings';
 import { MessageService } from 'primeng/api';
 import { timer } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'admin-trainings-form',
@@ -23,13 +24,15 @@ export class TrainingsFormComponent implements OnInit {
               private coursesService: CoursesService,
               private trainingsService: TrainingsService,
               private messageService: MessageService,
-              private location: Location) { 
+              private location: Location,
+              private route: ActivatedRoute) { 
     
   }
 
   ngOnInit(): void {
     this._initForm();
-    this._getCourses()
+    this._getCourses();
+    this._checkEditMode();
   }
 
   //initialize the form
@@ -40,52 +43,15 @@ export class TrainingsFormComponent implements OnInit {
       course: ['', Validators.required],
       countInTraining: ['', Validators.required],
       description: ['', Validators.required],
-      image: [''],
+      image: ['', Validators.required],
       isFeatured: [false]
-    })
+    });
   }
 
   private _getCourses() {
     this.coursesService.getCourses().subscribe((courses) => {
       this.courses = courses;
     });
-  }
-
-  get trainingForm() {
-    return this.form.controls;
-  }
-
-  onSubmit() {
-    this.isSubmitted = true;
-    if (this.form.invalid) return;
-
-    const trainingFormData = new FormData();
-    Object.keys(this.trainingForm).map((key) => {
-      trainingFormData.append(key, this.trainingForm[key].value);
-    });
-    // if (this.editmode) {
-    //   this._updateTraining(trainingFormData);
-    // } else {
-    //   this._addTraining(trainingFormData);
-    // }
-  }
-
-  onCancel() {
-
-  }
-
-  onImageUpload(event: any) {
-    console.log(event);
-    const file = event.target.files[0];
-    if (file) {
-      this.form.patchValue({ image: file });
-      this.form.get('image').updateValueAndValidity();
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        this.imageDisplay = fileReader.result;
-      };
-      fileReader.readAsDataURL(file);
-    }
   }
 
   private _addTraining(trainingData: FormData) {
@@ -134,6 +100,60 @@ export class TrainingsFormComponent implements OnInit {
         });
       }
     );
+  }
+
+  private _checkEditMode() {
+    this.route.params.subscribe((params) => {
+      if (params.id) {
+        this.editmode = false;
+        this.currentTrainingId = params.id;
+        this.trainingsService.getTraining(params.id).subscribe((training) => {
+          this.trainingForm.name.setValue(training.name);
+          this.trainingForm.course.setValue(training.course.id);
+          this.trainingForm.price.setValue(training.price);
+          this.trainingForm.countInTraining.setValue(training.countInTraining);
+          this.trainingForm.isFeatured.setValue(training.isFeatured);
+          this.trainingForm.description.setValue(training.description);
+          this.imageDisplay = training.image;
+          this.trainingForm.image.setValidators([]);
+          this.trainingForm.image.updateValueAndValidity();
+        });
+      }
+    });
+  }
+
+  onSubmit() {
+    this.isSubmitted = true;
+    if (this.form.invalid) return;
+
+    const trainingFormData = new FormData();
+    Object.keys(this.trainingForm).map((key) => {
+      trainingFormData.append(key, this.trainingForm[key].value);
+    });
+    if (this.editmode) {
+      this._updateTraining(trainingFormData);
+    } else {
+      this._addTraining(trainingFormData);
+    }
+  }
+
+  onCancel() {
+  }
+
+  onImageUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+      this.form.patchValue({ image: file });
+      this.form.get('image').updateValueAndValidity();
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        this.imageDisplay = fileReader.result;
+      };
+      fileReader.readAsDataURL(file);
+    }
+  }
+  get trainingForm() {
+    return this.form.controls;
   }
 
 }

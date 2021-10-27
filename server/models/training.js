@@ -25,7 +25,7 @@ const trainingSchema = mongoose.Schema({
         ref: 'Course',
         required: true
     },
-    countTraining: {
+    countInTraining: {
         type: Number,
         required: true,
         min: 0,

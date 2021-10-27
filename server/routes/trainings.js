@@ -49,7 +49,7 @@ router.post(`/`, uploadOptions.single('image'), async (req, res) => {
         image: `${basePath}${fileName}`,
         price: req.body.price,
         course: req.body.course,
-        countTraining: req.body.countTraining,
+        countInTraining: req.body.countInTraining,
         rating: req.body.rating,
         reviews: req.body.reviews,
         isFeatured: req.body.isFeatured
@@ -91,7 +91,7 @@ router.get(`/:id`, async (req, res) => {
 router.put(`/:id`, uploadOptions.single('image'), async (req, res) => {
     //validate
     if(!mongoose.isValidObjectId(req.params.id)) {
-        res.status(400).send('Invalid Training Id')
+        return res.status(400).send('Invalid Training Id')
     }
     const course = await Course.findById(req.body.course);
     if(!course) return res.status(400).send('Invalid Course')
@@ -118,7 +118,7 @@ router.put(`/:id`, uploadOptions.single('image'), async (req, res) => {
             image: imagepath,
             price: req.body.price,
             course: req.body.course,
-            countTraining: req.body.countTraining,
+            countInTraining: req.body.countInTraining,
             rating: req.body.rating,
             reviews: req.body.reviews,
             isFeatured: req.body.isFeatured
@@ -127,10 +127,10 @@ router.put(`/:id`, uploadOptions.single('image'), async (req, res) => {
         {new: true}
     )
     if (!updatedTraining)
-return res.status(404).send('The training cannot be updated.')
+return res.status(500).send('The training cannot be updated.')
 
 res.send(updatedTraining);
-})
+});
 
 //delete a training
 router.delete(`/:id`, (req, res) => {

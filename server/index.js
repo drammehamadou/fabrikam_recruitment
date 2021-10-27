@@ -21,17 +21,17 @@ app.use("/public/uploads", express.static(__dirname + "/public/uploads"));
 app.use(errorHandler);
 
 //Routes
-const attendeesRouter = require('./routers/attendees');
-const bookingsRouter = require('./routers/bookings');
-const coursesRouter = require('./routers/courses');
-const trainingsRouter = require('./routers/trainings');
+const coursesRoutes = require('./routes/courses');
+const trainingsRoutes = require('./routes/trainings');
+const attendeesRoutes = require('./routes/attendees');
+const bookingsRoutes = require('./routes/bookings');
 
 const api = process.env.API_URL;
 
-app.use(`${api}/attendees`, attendeesRouter);
-app.use(`${api}/bookings`, bookingsRouter);
-app.use(`${api}/courses`, coursesRouter);
-app.use(`${api}/trainings`, trainingsRouter);
+app.use(`${api}/courses`, coursesRoutes);
+app.use(`${api}/trainings`, trainingsRoutes);
+app.use(`${api}/attendees`, attendeesRoutes);
+app.use(`${api}/bookings`, bookingsRoutes);
 
 //database connection
 mongoose.connect(process.env.CONNECTION_STRING, {

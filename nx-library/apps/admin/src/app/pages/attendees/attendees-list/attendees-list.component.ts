@@ -55,4 +55,7 @@ export class AttendeesListComponent implements OnInit {
       this.attendees = attendees;
     });
   }
+  getCountryName(countryKey: string) {
+    if (countryKey) return this.attendeesService.getCountry(countryKey);
+  }
 }

@@ -29,6 +29,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {EditorModule} from 'primeng/editor';
 import { TagModule } from 'primeng/tag';
+import {InputMaskModule} from 'primeng/inputmask';
 
 import { CoursesService } from '@nx-library/trainings';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -88,6 +89,7 @@ const routes: Routes = [
     InputSwitchModule,
     EditorModule,
     TagModule,
+    InputMaskModule,
     RouterModule.forRoot(routes, 
       { initialNavigation: 'enabled' }),
   ],

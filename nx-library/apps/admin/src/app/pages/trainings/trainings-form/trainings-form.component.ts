@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TrainingsFormComponent implements OnInit {
 
-  editmode : false;
+  editmode : boolean = false;
   form: FormGroup;
   isSubmitted = false;
   imageDisplay: string | ArrayBuffer;
@@ -54,6 +54,7 @@ export class TrainingsFormComponent implements OnInit {
     });
   }
 
+  //add training
   private _addTraining(trainingData: FormData) {
     this.trainingsService.createTraining(trainingData).subscribe(
       (training: Training) => {
@@ -78,8 +79,10 @@ export class TrainingsFormComponent implements OnInit {
     );
   }
 
+  //update trainings
   private _updateTraining(trainingFormData: FormData) {
-    this.trainingsService.updateTraining(trainingFormData, this.currentTrainingId).subscribe(
+    this.trainingsService.updateTraining(trainingFormData, 
+      this.currentTrainingId).subscribe(
       () => {
         this.messageService.add({
           severity: 'success',
@@ -105,7 +108,7 @@ export class TrainingsFormComponent implements OnInit {
   private _checkEditMode() {
     this.route.params.subscribe((params) => {
       if (params.id) {
-        this.editmode = false;
+        this.editmode = true;
         this.currentTrainingId = params.id;
         this.trainingsService.getTraining(params.id).subscribe((training) => {
           this.trainingForm.name.setValue(training.name);
@@ -140,6 +143,7 @@ export class TrainingsFormComponent implements OnInit {
   onCancel() {
   }
 
+  //update image by creating a file reader
   onImageUpload(event) {
     const file = event.target.files[0];
     if (file) {

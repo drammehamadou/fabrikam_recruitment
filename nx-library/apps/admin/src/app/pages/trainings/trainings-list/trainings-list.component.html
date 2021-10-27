@@ -23,7 +23,7 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th>#</th>
-                        <th>Id</th>
+                        <!-- <th>Id</th> -->
                         <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
                         <th>Description</th>
                         <th>Image</th>
@@ -41,7 +41,7 @@
                 <ng-template pTemplate="body" let-training let-rowIndex="rowIndex">
                     <tr>
                         <td>{{rowIndex + 1}}</td>
-                        <td>{{training.id }}</td>
+                        <!-- <td>{{training.id }}</td> -->
                         <td>{{training.name}}</td>
                         <td>{{training.description }}</td>
                         <td><img [src]="training.image" style="width: 100%" alt="img" /></td>
@@ -57,12 +57,13 @@
                             icon="pi pi-pencil" 
                             class="p-button-rounded p-button-warning p-mr-2"
                             pTooltip="Edit {{training.name}}"
+                            (click)="updateTraining(training.id)"
                             ></button>
                         </td>
                         <td>
                             <button pButton 
                             pRipple icon="pi pi-trash" 
-                            
+                            (click)="deleteTraining(training.id)"
                             pTooltip="Delete {{training.name}}"
                             class="p-button-rounded p-button-danger"></button>
                         </td>

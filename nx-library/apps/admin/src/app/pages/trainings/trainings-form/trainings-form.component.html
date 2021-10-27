@@ -64,8 +64,10 @@
             <div class="p-field p-col">
                 <label for="description">Training Details</label>
                 <br>
-                <p-editor formControlName="description" id="description"
-                [style]="{'height':'320px'}"></p-editor>
+                <textarea [rows]="5" [cols]="30" 
+                formControlName="description"
+                id="description"
+                pInputTextarea></textarea>
                 <small *ngIf="trainingForm.description.invalid && isSubmitted" 
                 class="p-error">Description is required</small>
             </div>
@@ -83,7 +85,7 @@
                   >Image is required</small
                 >
                 <div class="p-col-2 p-mt-2 p-pl-0">
-                  <img style="width: 100%" [src]="imageDisplay" alt="" />
+                  <img style="width: 100%" [src]="imageDisplay" alt="training img" />
                 </div>
               </div>
         </div>

@@ -49,7 +49,7 @@
                   [rounded]="true"
                 ></p-tag>
               </td>
-              <td>{{ attendee.country }}</td>
+              <td>{{ getCountryName(attendee.country) }}</td>
               <td>
                 <p-button
                   (click)="updateAttendee(attendee.id)"

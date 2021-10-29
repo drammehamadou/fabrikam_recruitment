@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -39,7 +39,7 @@ import { AttendeesFormComponent } from './pages/attendees/attendees-form/attende
 import { AttendeesListComponent } from './pages/attendees/attendees-list/attendees-list.component';
 import { BookingsListComponent } from './pages/bookings/bookings-list/bookings-list.component';
 import { BookingsDetailsComponent } from './pages/bookings/bookings-details/bookings-details.component';
-import { AttendeesModule, AuthGuard } from '@nx-library/attendees';
+import { AttendeesModule, AuthGuard, JwtInterceptor } from '@nx-library/attendees';
 
 const routes: Routes = [
   { path: '', component: ShellComponent, canActivate: [AuthGuard],
@@ -100,7 +100,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes, 
       { initialNavigation: 'enabled' }),
   ],
-  providers: [CoursesService, MessageService, ConfirmationService],
+  providers: [CoursesService, MessageService, ConfirmationService,
+  {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

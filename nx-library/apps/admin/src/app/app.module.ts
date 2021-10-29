@@ -30,14 +30,15 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {EditorModule} from 'primeng/editor';
 import { TagModule } from 'primeng/tag';
 import {InputMaskModule} from 'primeng/inputmask';
+import { FieldsetModule } from 'primeng/fieldset';
 
 import { CoursesService } from '@nx-library/trainings';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { AttendeesFormComponent } from './pages/attendees/attendees-form/attendees-form.component';
 import { AttendeesListComponent } from './pages/attendees/attendees-list/attendees-list.component';
-import { BookingsFormComponent } from './pages/bookings/bookings-form/bookings-form.component';
 import { BookingsListComponent } from './pages/bookings/bookings-list/bookings-list.component';
+import { BookingsDetailsComponent } from './pages/bookings/bookings-details/bookings-details.component';
 
 const routes: Routes = [
   { path: '', component: ShellComponent,
@@ -53,8 +54,7 @@ const routes: Routes = [
           { path: 'attendees/form', component: AttendeesFormComponent },
           { path: 'attendees/form/:id', component: AttendeesFormComponent },
           { path: 'bookings', component: BookingsListComponent },
-          { path: 'bookings/form', component: BookingsFormComponent },
-          { path: 'bookings/form/:id', component: BookingsFormComponent }
+          { path: 'bookings/:id', component: BookingsDetailsComponent }
   ]}
 ]
 
@@ -67,7 +67,11 @@ const routes: Routes = [
     CoursesListComponent, 
     CoursesFormComponent, 
     TrainingsListComponent, 
-    TrainingsFormComponent, AttendeesFormComponent, AttendeesListComponent, BookingsFormComponent, BookingsListComponent],
+    TrainingsFormComponent, 
+    AttendeesFormComponent, 
+    AttendeesListComponent,  
+    BookingsListComponent, 
+    BookingsDetailsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -90,6 +94,7 @@ const routes: Routes = [
     EditorModule,
     TagModule,
     InputMaskModule,
+    FieldsetModule,
     RouterModule.forRoot(routes, 
       { initialNavigation: 'enabled' }),
   ],

@@ -1,0 +1,80 @@
+<p-toast></p-toast>
+<div class="admin-page" *ngIf="booking">
+  <p-card [header]="'View Booking'" subheader="You can edit booking status here">
+    <p-fieldset legend="Booking Details" styleClass="p-mb-4" [toggleable]="true">
+      <div class="p-grid">
+        <div class="p-col-4">
+          <h5>Booking Id</h5>
+          <p>{{ booking.id }}</p>
+        </div>
+
+        <div class="p-col-4">
+          <h5>Booking Date</h5>
+          <p>{{ booking.dateBooked | date: 'short' }}</p>
+        </div>
+
+        <div class="p-col-4">
+          <h5>Booking Status</h5>
+          <p-dropdown
+            [options]="bookingStatuses"
+            optionLabel="name"
+            optionValue="id"
+            (onChange)="onStatusChange($event)"
+            [(ngModel)]="selectedStatus"
+          >
+          </p-dropdown>
+        </div>
+
+        <div class="p-col-4">
+          <h5>Booking Total Price</h5>
+          <p>{{ booking.totalPrice | currency }}</p>
+        </div>
+      </div>
+    </p-fieldset>
+    <p-fieldset legend="Booking Items" styleClass="p-mb-4" [toggleable]="true">
+      <div class="p-grid p-mb-5">
+        <div class="p-col-2 p-text-bold">Name</div>
+        <div class="p-col-2 p-text-bold">Course</div>
+        <div class="p-col-2 p-text-bold">Price</div>
+        <div class="p-col-2 p-text-bold">Quantity</div>
+        <div class="p-col-2 p-text-bold">Subtotal</div>
+      </div>
+      <!-- <div class="p-grid p-mb-5" *ngFor="let bookingItem of booking.bookingItems">
+        <div class="p-col-2">{{ bookingItem.training.name }}</div>
+        <div class="p-col-2">{{ bookingItem.training.course.name }}</div>
+        <div class="p-col-2">{{ bookingItem.training.price | currency: 'GBP':true }}</div>
+        <div class="p-col-2">{{ bookingItem.quantity }}</div>
+        <div class="p-col-2">{{ bookingItem.training.price * bookingItem.quantity | currency }}</div>
+      </div> -->
+      <div class="p-grid" style="color: green">
+        <div class="p-col-2 p-offset-8 p-text-bold">Total Price</div>
+
+        <div class="p-col-2 p-text-bold">{{ booking.totalPrice | currency: 'GBP':true }}</div>
+      </div>
+    </p-fieldset>
+    <p-fieldset legend="Booking Address" styleClass="p-mb-4" [toggleable]="true">
+      <div class="p-grid">
+        <div class="p-col-4">
+          <h5>Booking Address</h5>
+          <p>
+            {{ booking.address1 }}<br />
+            {{ booking.address2 }}<br />
+            {{ booking.postCode }} {{ booking.county }}<br />
+            {{ booking.country }}
+          </p>
+        </div>
+
+        <div class="p-col-4">
+          <h5>Attendee Info</h5>
+          <p>{{ booking.attendee.name }}</p>
+          <!-- <p>{{ booking.attendee.email }}</p> -->
+        </div>
+
+        <div class="p-col-4">
+          <h5>Contact Info</h5>
+          <p>{{ booking.phone }}</p>
+        </div>
+      </div>
+    </p-fieldset>
+  </p-card>
+</div>

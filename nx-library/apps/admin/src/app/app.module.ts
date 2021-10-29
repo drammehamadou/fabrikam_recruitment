@@ -39,6 +39,7 @@ import { AttendeesFormComponent } from './pages/attendees/attendees-form/attende
 import { AttendeesListComponent } from './pages/attendees/attendees-list/attendees-list.component';
 import { BookingsListComponent } from './pages/bookings/bookings-list/bookings-list.component';
 import { BookingsDetailsComponent } from './pages/bookings/bookings-details/bookings-details.component';
+import { AttendeesModule } from '@nx-library/attendees';
 
 const routes: Routes = [
   { path: '', component: ShellComponent,
@@ -95,6 +96,7 @@ const routes: Routes = [
     TagModule,
     InputMaskModule,
     FieldsetModule,
+    AttendeesModule,
     RouterModule.forRoot(routes, 
       { initialNavigation: 'enabled' }),
   ],

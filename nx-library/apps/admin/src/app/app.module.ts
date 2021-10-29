@@ -39,10 +39,10 @@ import { AttendeesFormComponent } from './pages/attendees/attendees-form/attende
 import { AttendeesListComponent } from './pages/attendees/attendees-list/attendees-list.component';
 import { BookingsListComponent } from './pages/bookings/bookings-list/bookings-list.component';
 import { BookingsDetailsComponent } from './pages/bookings/bookings-details/bookings-details.component';
-import { AttendeesModule } from '@nx-library/attendees';
+import { AttendeesModule, AuthGuard } from '@nx-library/attendees';
 
 const routes: Routes = [
-  { path: '', component: ShellComponent,
+  { path: '', component: ShellComponent, canActivate: [AuthGuard],
         children: [
           { path: 'dashboard', component: DashboardComponent },
           { path: 'courses', component: CoursesListComponent },

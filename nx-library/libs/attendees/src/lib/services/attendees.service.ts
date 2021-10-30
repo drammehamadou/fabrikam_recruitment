@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Attendee } from '../models/attendee';
 import { environment } from '@env/environment';
+import { map } from 'rxjs/operators';
 import * as countriesLib from 'i18n-iso-countries';
 declare const require;
 
@@ -34,6 +35,12 @@ export class AttendeesService {
 
   deleteAttendee(attendeeId: string): Observable<any> {
     return this.http.delete<any>(`${this.apiURLAttendees}/${attendeeId}`);
+  }
+
+  getAttendeesCount(): Observable<number> {
+    return this.http
+      .get<number>(`${this.apiURLAttendees}/get/count`)
+      .pipe(map((objectValue: any) => objectValue.attendeeCount));
   }
 
   getCountries(): { id: string; name: string }[] {

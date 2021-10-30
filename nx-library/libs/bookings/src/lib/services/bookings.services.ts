@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Booking } from '../models/booking';
 import { environment } from '@env/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,17 @@ export class BookingsService {
 
   deleteBooking(bookingId: string): Observable<any> {
     return this.http.delete<any>(`${this.apiURLBookings}/${bookingId}`);
+  }
+
+  getBookingsCount(): Observable<number> {
+    return this.http
+      .get<number>(`${this.apiURLBookings}/get/count`)
+      .pipe(map((objectValue: any) => objectValue.bookingCount));
+  }
+
+  getTotalSales(): Observable<number> {
+    return this.http
+      .get<number>(`${this.apiURLBookings}/get/totalsales`)
+      .pipe(map((objectValue: any) => objectValue.totalsales));
   }
 }

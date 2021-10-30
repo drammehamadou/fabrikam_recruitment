@@ -27,7 +27,7 @@
 
         <div class="p-col-4">
           <h5>Booking Total Price</h5>
-          <p>{{ booking.totalPrice | currency }}</p>
+          <p>{{ booking.totalPrice | currency:'GBP':true }}</p>
         </div>
       </div>
     </p-fieldset>
@@ -49,7 +49,7 @@
       <div class="p-grid" style="color: green">
         <div class="p-col-2 p-offset-8 p-text-bold">Total Price</div>
 
-        <div class="p-col-2 p-text-bold">{{ booking.totalPrice | currency: 'GBP':true }}</div>
+        <div class="p-col-2 p-text-bold">{{ booking.totalPrice | currency:'GBP':true }}</div>
       </div>
     </p-fieldset>
     <p-fieldset legend="Booking Address" styleClass="p-mb-4" [toggleable]="true">

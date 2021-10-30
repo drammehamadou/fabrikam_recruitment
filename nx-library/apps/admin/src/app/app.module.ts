@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ShellComponent } from './shared/shell/shell.component';
@@ -39,28 +38,10 @@ import { AttendeesFormComponent } from './pages/attendees/attendees-form/attende
 import { AttendeesListComponent } from './pages/attendees/attendees-list/attendees-list.component';
 import { BookingsListComponent } from './pages/bookings/bookings-list/bookings-list.component';
 import { BookingsDetailsComponent } from './pages/bookings/bookings-details/bookings-details.component';
-import { AttendeesModule, AuthGuard, JwtInterceptor } from '@nx-library/attendees';
+import { AttendeesModule, JwtInterceptor } from '@nx-library/attendees';
 import { RecommendationComponent } from './pages/recommendation/recommendation.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
-
-const routes: Routes = [
-  { path: '', component: ShellComponent, canActivate: [AuthGuard],
-        children: [
-          { path: 'admin-dashboard', component: AdminDashboardComponent },
-          { path: 'courses', component: CoursesListComponent },
-          { path: 'courses/form', component: CoursesFormComponent },
-          { path: 'courses/form/:id', component: CoursesFormComponent },
-          { path: 'trainings', component: TrainingsListComponent },
-          { path: 'trainings/form', component: TrainingsFormComponent },
-          { path: 'trainings/form/:id', component: TrainingsFormComponent },
-          { path: 'attendees', component: AttendeesListComponent },
-          { path: 'attendees/form', component: AttendeesFormComponent },
-          { path: 'attendees/form/:id', component: AttendeesFormComponent },
-          { path: 'bookings', component: BookingsListComponent },
-          { path: 'bookings/:id', component: BookingsDetailsComponent },
-          { path: 'recommendation', component: RecommendationComponent }
-  ]}
-]
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -74,7 +55,9 @@ const routes: Routes = [
     AttendeesFormComponent, 
     AttendeesListComponent,  
     BookingsListComponent, 
-    BookingsDetailsComponent, RecommendationComponent, AdminDashboardComponent],
+    BookingsDetailsComponent, 
+    RecommendationComponent, 
+    AdminDashboardComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -100,8 +83,7 @@ const routes: Routes = [
     FieldsetModule,
     AccordionModule,
     AttendeesModule,
-    RouterModule.forRoot(routes, 
-      { initialNavigation: 'enabled' }),
+    AppRoutingModule
   ],
   providers: [CoursesService, MessageService, ConfirmationService,
   {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Training, TrainingsService } from '@nx-library/trainings';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'admin-trainings-list',
@@ -10,6 +12,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class TrainingsListComponent implements OnInit {
   trainings: Training[] = [];
+  endsubs$: Subject<any> = new Subject();
   
   constructor(private trainingsService: TrainingsService,
               private router: Router,
@@ -20,8 +23,16 @@ export class TrainingsListComponent implements OnInit {
     this._getTrainings();
   }
 
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
+  }
+
   private _getTrainings() {
-    this.trainingsService.getTrainings().subscribe((trainings) => {
+    this.trainingsService
+    .getTrainings()
+    .pipe(takeUntil(this.endsubs$))
+    .subscribe((trainings) => {
       this.trainings = trainings;
     });
   }
@@ -36,7 +47,10 @@ export class TrainingsListComponent implements OnInit {
       header: 'Delete Training',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.trainingsService.deleteTraining(trainingId).subscribe(
+        this.trainingsService
+        .deleteTraining(trainingId)
+        .pipe(takeUntil(this.endsubs$))
+        .subscribe(
           () => {
             this._getTrainings();
             this.messageService.add({

@@ -1,9 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Course, CoursesService, Training, TrainingsService } from '@nx-library/trainings';
 import { MessageService } from 'primeng/api';
-import { timer } from 'rxjs';
+import { Subject, timer } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,14 +12,14 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './trainings-form.component.html',
   styleUrls: ['./trainings-form.component.scss']
 })
-export class TrainingsFormComponent implements OnInit {
-
+export class TrainingsFormComponent implements OnInit, OnDestroy {
   editmode : boolean = false;
   form: FormGroup;
   isSubmitted = false;
   imageDisplay: string | ArrayBuffer;
   currentTrainingId: string;
   courses : Course[] = [];
+  endsubs$: Subject<any> = new Subject();
 
   constructor(private formBuilder: FormBuilder,
               private coursesService: CoursesService,
@@ -35,6 +36,11 @@ export class TrainingsFormComponent implements OnInit {
     this._checkEditMode();
   }
 
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
+  }
+
   //initialize the form
   private _initForm() {
     this.form = this.formBuilder.group({
@@ -49,14 +55,20 @@ export class TrainingsFormComponent implements OnInit {
   }
 
   private _getCourses() {
-    this.coursesService.getCourses().subscribe((courses) => {
+    this.coursesService
+    .getCourses()
+    .pipe(takeUntil(this.endsubs$))
+    .subscribe((courses) => {
       this.courses = courses;
     });
   }
 
   //add training
   private _addTraining(trainingData: FormData) {
-    this.trainingsService.createTraining(trainingData).subscribe(
+    this.trainingsService
+    .createTraining(trainingData)
+    .pipe(takeUntil(this.endsubs$))
+    .subscribe(
       (training: Training) => {
         this.messageService.add({
           severity: 'success',
@@ -81,8 +93,11 @@ export class TrainingsFormComponent implements OnInit {
 
   //update trainings
   private _updateTraining(trainingFormData: FormData) {
-    this.trainingsService.updateTraining(trainingFormData, 
-      this.currentTrainingId).subscribe(
+    this.trainingsService
+    .updateTraining(trainingFormData, 
+      this.currentTrainingId)
+      .pipe(takeUntil(this.endsubs$))
+      .subscribe(
       () => {
         this.messageService.add({
           severity: 'success',
@@ -106,11 +121,16 @@ export class TrainingsFormComponent implements OnInit {
   }
 
   private _checkEditMode() {
-    this.route.params.subscribe((params) => {
+    this.route.params
+    .pipe(takeUntil(this.endsubs$))
+    .subscribe((params) => {
       if (params.id) {
         this.editmode = true;
         this.currentTrainingId = params.id;
-        this.trainingsService.getTraining(params.id).subscribe((training) => {
+        this.trainingsService
+        .getTraining(params.id)
+        .pipe(takeUntil(this.endsubs$))
+        .subscribe((training) => {
           this.trainingForm.name.setValue(training.name);
           this.trainingForm.course.setValue(training.course.id);
           this.trainingForm.price.setValue(training.price);
@@ -141,6 +161,7 @@ export class TrainingsFormComponent implements OnInit {
   }
 
   onCancel() {
+    this.location.back();
   }
 
   //update image by creating a file reader

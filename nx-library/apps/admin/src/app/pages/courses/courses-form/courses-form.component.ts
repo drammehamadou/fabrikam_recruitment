@@ -1,22 +1,23 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Course, CoursesService } from '@nx-library/trainings';
 import { MessageService } from 'primeng/api';
-import { timer } from 'rxjs';
+import {Subject, timer } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'admin-courses-form',
   templateUrl: './courses-form.component.html',
   styleUrls: ['./courses-form.component.scss']
 })
-export class CoursesFormComponent implements OnInit {
-
+export class CoursesFormComponent implements OnInit, OnDestroy {
   form!: FormGroup;
   isSubmitted = false;
   editmode = false;
   currentCourseId! : string;
+  endsubs$: Subject<any> = new Subject();
 
   constructor(private formBuilder: FormBuilder,
               private coursesService: CoursesService,
@@ -32,6 +33,11 @@ export class CoursesFormComponent implements OnInit {
     })
 
     this._checkEditMode();
+  }
+
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
   }
 
   //onsumit create course
@@ -54,8 +60,15 @@ export class CoursesFormComponent implements OnInit {
     }
   }
 
+  onCancle() {
+    this.location.back();
+  }
+
   private _addCourse(course: Course) {
-    this.coursesService.createCourse(course).subscribe(
+    this.coursesService
+    .createCourse(course)
+    .pipe(takeUntil(this.endsubs$))
+    .subscribe(
       (course: Course) => {
         this.messageService.add({
           severity: 'success',
@@ -79,7 +92,10 @@ export class CoursesFormComponent implements OnInit {
   }
 
   private _updateCourse(course: Course) {
-    this.coursesService.updateCourse(course).subscribe(
+    this.coursesService
+    .updateCourse(course)
+    .pipe(takeUntil(this.endsubs$))
+    .subscribe(
       () => {
         this.messageService.add({
           severity: 'success',
@@ -107,7 +123,10 @@ export class CoursesFormComponent implements OnInit {
       if(params.id) {
         this.editmode = true;
         this.currentCourseId = params.id;
-        this.coursesService.getCourse(params.id).subscribe(course => {
+        this.coursesService
+        .getCourse(params.id)
+        .pipe(takeUntil(this.endsubs$))
+        .subscribe(course => {
           this.courseForm.name.setValue(course.name);
           this.courseForm.icon.setValue(course.icon);
           this.courseForm.color.setValue(course.color);

@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Booking, BookingsService } from '@nx-library/bookings';
 import { MessageService } from 'primeng/api';
 import { BOOKING_STATUS } from '../booking.constants';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'admin-bookings-details',
   templateUrl: './bookings-details.component.html',
   styleUrls: ['./bookings-details.component.scss']
 })
-export class BookingsDetailsComponent implements OnInit {
+export class BookingsDetailsComponent implements OnInit, OnDestroy {
   booking: Booking;
   bookingStatuses = [];
   selectedStatus: any;
+  endsubs$: Subject<any> = new Subject();
 
   constructor(
     private bookingService: BookingsService,
@@ -23,6 +26,11 @@ export class BookingsDetailsComponent implements OnInit {
   ngOnInit(): void {
     this._mapBookingStatus();
     this._getBooking();
+  }
+
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
   }
 
   private _mapBookingStatus() {
@@ -37,7 +45,10 @@ export class BookingsDetailsComponent implements OnInit {
   private _getBooking() {
     this.route.params.subscribe((params) => {
       if (params.id) {
-        this.bookingService.getBooking(params.id).subscribe((booking) => {
+        this.bookingService
+        .getBooking(params.id)
+        .pipe(takeUntil(this.endsubs$))
+        .subscribe((booking) => {
           this.booking = booking;
           this.selectedStatus = booking.status;
         });
@@ -46,8 +57,11 @@ export class BookingsDetailsComponent implements OnInit {
   }
 
   onStatusChange(event) {
-    this.bookingService.updateBooking({ status: event.value }, 
-      this.booking.id).subscribe(
+    this.bookingService
+    .updateBooking({ status: event.value }, 
+      this.booking.id)
+      .pipe(takeUntil(this.endsubs$))
+      .subscribe(
       () => {
         this.messageService.add({
           severity: 'success',

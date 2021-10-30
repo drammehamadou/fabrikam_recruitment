@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Attendee, AttendeesService } from '@nx-library/attendees';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'admin-attendees-list',
@@ -10,6 +12,7 @@ import { Attendee, AttendeesService } from '@nx-library/attendees';
 })
 export class AttendeesListComponent implements OnInit {
   attendees: Attendee[] = [];
+  endsubs$: Subject<any> = new Subject();
 
   constructor(private attendeesService: AttendeesService,
               private messageService: MessageService,
@@ -20,13 +23,21 @@ export class AttendeesListComponent implements OnInit {
     this._getAttendees();
   }
 
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
+  }
+
   deleteAttendee(attendeeId: string) {
     this.confirmationService.confirm({
       message: 'Do you want to Delete this Attendee?',
       header: 'Delete Attendee',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.attendeesService.deleteAttendee(attendeeId).subscribe(
+        this.attendeesService
+        .deleteAttendee(attendeeId)
+        .pipe(takeUntil(this.endsubs$))
+        .subscribe(
           () => {
             this._getAttendees();
             this.messageService.add({
@@ -51,7 +62,10 @@ export class AttendeesListComponent implements OnInit {
   }
 
   private _getAttendees() {
-    this.attendeesService.getAttendees().subscribe((attendees) => {
+    this.attendeesService
+    .getAttendees()
+    .pipe(takeUntil(this.endsubs$))
+    .subscribe((attendees) => {
       this.attendees = attendees;
     });
   }

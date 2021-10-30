@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Booking, BookingsService } from '@nx-library/bookings';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { BOOKING_STATUS } from '../booking.constants';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'admin-bookings-list',
   templateUrl: './bookings-list.component.html',
   styleUrls: ['./bookings-list.component.scss']
 })
-export class BookingsListComponent implements OnInit {
-
+export class BookingsListComponent implements OnInit, OnDestroy {
   bookings: Booking[] = [];
   bookingStatus = BOOKING_STATUS;
+  endsubs$: Subject<any> = new Subject();
+
   constructor(
     private bookingsService: BookingsService,
     private messageService: MessageService,
@@ -24,8 +27,16 @@ export class BookingsListComponent implements OnInit {
     this._getBookings();
   }
 
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
+  }
+
   _getBookings() {
-    this.bookingsService.getBookings().subscribe((bookings) => {
+    this.bookingsService
+    .getBookings()
+    .pipe(takeUntil(this.endsubs$))
+    .subscribe((bookings) => {
       this.bookings = bookings;
     });
   }
@@ -40,7 +51,10 @@ export class BookingsListComponent implements OnInit {
       header: 'Delete Booking',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.bookingsService.deleteBooking(bookingId).subscribe(
+        this.bookingsService
+        .deleteBooking(bookingId)
+        .pipe(takeUntil(this.endsubs$))
+        .subscribe(
           () => {
             this._getBookings();
             this.messageService.add({

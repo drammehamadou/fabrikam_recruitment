@@ -1,0 +1,17 @@
+.nav{
+    li{
+        list-style: none;
+        display: inline-block;
+        margin-right: 15px;
+
+        a {
+            color: darkcyan;
+            cursor: pointer;
+            font-size: large;
+            &:hover {
+                color: blue;
+
+            }
+        }
+    }
+}

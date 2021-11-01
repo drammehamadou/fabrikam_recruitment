@@ -13,7 +13,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "nxLibrary",
+            "prefix": "fabrikam",
             "style": "camelCase"
           }
         ],
@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "nx-library",
+            "prefix": "fabrikam",
             "style": "kebab-case"
           }
         ]

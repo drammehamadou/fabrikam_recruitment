@@ -1,0 +1,29 @@
+.trainings-search {
+    display: flex;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    width: 275px;
+    height: 35px;
+
+    .pi {
+        width: 25px;
+        font-size: 1.3em;
+        color:white;
+        margin-top: 10px;
+        margin-left: 10px;
+
+    }
+
+    &-input {
+        height: 35px;
+        background-color: transparent;
+        color: black;
+        border: 0;
+    }
+
+    &:focus, 
+    &:active {
+        border: 0;
+        outline: none;
+    }
+}

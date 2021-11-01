@@ -1,24 +1,24 @@
 //base
-// @import './base/colors.scss';
-// @import './base/fonts.scss';
-// @import './base/mixins.scss';
-// @import './base/configuration.scss';
+@import './base/colors.scss';
+@import './base/fonts.scss';
+@import './base/mixins.scss';
+@import './base/configuration.scss';
 
 //primeng
-// @import '~primeicons/primeicons.css';
-// @import '~primeng/resources/themes/saga-blue/theme.css';
-// @import '~primeng/resources/primeng.min.css';
-// @import '~primeflex/primeflex.css';
+@import '~primeicons/primeicons.css';
+@import '~primeng/resources/themes/saga-blue/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~primeflex/primeflex.css';
 
 //pages
-// @import './apps/fabrikam/components/landing.scss';
-// @import './apps/fabrikam/components/trainings-list.scss';
+@import './apps/fabrikam/components/landing.scss';
+@import './apps/fabrikam/components/trainings-list.scss';
 
 //shared
-// @import './apps/fabrikam/shared/footer.scss';
-// @import './apps/fabrikam/shared/header.scss';
+@import './apps/fabrikam/shared/footer.scss';
+@import './apps/fabrikam/shared/header.scss';
 
 //libs
-// @import './libs/trainings/training-item.scss';
-// @import './libs/ui/banner.scss';
-// @import './libs/ui/slider.scss';
+@import './libs/trainings/training-item.scss';
+@import './libs/ui/banner.scss';
+@import './libs/ui/slider.scss';

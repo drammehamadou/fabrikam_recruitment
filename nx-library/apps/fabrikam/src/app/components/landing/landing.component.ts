@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'nx-library-landing',
+  selector: 'fabrikam-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss']
 })

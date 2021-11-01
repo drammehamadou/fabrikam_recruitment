@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'nx-library-header',
+  selector: 'fabrikam-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })

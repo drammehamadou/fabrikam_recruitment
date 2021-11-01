@@ -11,6 +11,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { UiModule } from '@nx-library/ui';
 import {ButtonModule} from 'primeng/button';
 import {AccordionModule} from 'primeng/accordion';
+import { NavComponent } from './shared/nav/nav.component';
+import { TrainingsModule } from '@nx-library/trainings';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -18,13 +20,14 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [AppComponent, LandingComponent, TrainingListComponent, HeaderComponent, FooterComponent],
+  declarations: [AppComponent, LandingComponent, TrainingListComponent, HeaderComponent, FooterComponent, NavComponent],
   imports: [BrowserModule, 
             RouterModule.forRoot(routes),
             UiModule,
             ButtonModule,
             AccordionModule,
-            BrowserAnimationsModule
+            BrowserAnimationsModule,
+            TrainingsModule
             
           ],
   providers: [],

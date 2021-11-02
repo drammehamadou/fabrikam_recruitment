@@ -13,6 +13,7 @@ import {ButtonModule} from 'primeng/button';
 import {AccordionModule} from 'primeng/accordion';
 import { NavComponent } from './shared/nav/nav.component';
 import { TrainingsModule } from '@nx-library/trainings';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   declarations: [AppComponent, LandingComponent, TrainingListComponent, HeaderComponent, FooterComponent, NavComponent],
   imports: [BrowserModule, 
             RouterModule.forRoot(routes),
+            HttpClientModule,
             UiModule,
             ButtonModule,
             AccordionModule,

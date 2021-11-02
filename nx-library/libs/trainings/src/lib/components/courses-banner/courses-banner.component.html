@@ -1,1 +1,17 @@
-<p>courses-banner works!</p>
+<div class="courses-banner">
+    <h3>Courses</h3>
+    <div class="grid">
+      <div class="col-12 md:col-2 lg:col-2" *ngFor="let course of courses">
+        <div 
+        class="course"
+        [routerLink]="'/trainings/course/' + course.id"
+        [ngStyle]="{ backgroundColor: course.color }"
+        >
+          <div class="course-icon">
+            <i class="pi pi-{{ course.icon }}"></i>
+          </div>
+          <div class="course-name">{{course.name}}</div>
+        </div>
+      </div>
+    </div>
+  </div>

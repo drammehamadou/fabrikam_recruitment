@@ -6,9 +6,13 @@ import { FeaturedTrainingsComponent } from './components/featured-trainings/feat
 import { RouterModule } from '@angular/router';
 import { TrainingsItemsComponent } from './components/trainings-items/trainings-items.component'
 import {ButtonModule} from 'primeng/button';
+import {AccordionModule} from 'primeng/accordion';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, ButtonModule],
+  imports: [CommonModule, 
+    RouterModule, 
+    ButtonModule,
+    AccordionModule],
   declarations: [
     TrainingsSearchComponent,
     CoursesBannerComponent,

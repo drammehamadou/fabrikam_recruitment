@@ -16,14 +16,14 @@ export class AdminDashboardComponent implements OnInit, OnDestroy{
 
   constructor(
     private attendeeService: AttendeesService,
-    private trainingService: TrainingsService,
+    private trainingsService: TrainingsService,
     private bookingsService: BookingsService
   ) {}
 
   ngOnInit(): void {
     combineLatest([
       this.bookingsService.getBookingsCount(),
-      this.trainingService.getTrainingsCount(),
+      this.trainingsService.getTrainingsCount(),
       this.attendeeService.getAttendeesCount(),
       this.bookingsService.getTotalSales()
     ]).pipe(takeUntil(this.endsubs$))

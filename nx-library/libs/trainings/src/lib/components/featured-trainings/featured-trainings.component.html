@@ -6,3 +6,19 @@
       </div>
     </div>
   </div>
+
+  <p-accordion *ngFor="let training of featuredTrainings">
+    <p-accordionTab header="{{training.name}}" [selected]="true">
+       {{training.description}}
+       <br>
+       {{training.price | currency:'GBP':true }}
+       <br>
+       <button pButton 
+       type="button" 
+       label="Add to basket" 
+       class="p-button-outlined more">
+       <i class="pi pi-shopping-cart"></i>
+      </button>
+    </p-accordionTab>
+    
+</p-accordion>

@@ -1,8 +1,8 @@
+@import '~normalize.css/normalize.css';
 //base
 @import './base/colors.scss';
 @import './base/fonts.scss';
 @import './base/mixins.scss';
-@import './base/configuration.scss';
 
 //primeng
 @import '~primeicons/primeicons.css';
@@ -10,15 +10,18 @@
 @import '~primeng/resources/primeng.min.css';
 @import '~primeflex/primeflex.css';
 
-//pages
-@import './apps/fabrikam/components/landing.scss';
-@import './apps/fabrikam/components/trainings-list.scss';
+@import './base/configuration.scss';
 
 //shared
 @import './apps/fabrikam/shared/footer.scss';
 @import './apps/fabrikam/shared/header.scss';
 
+//pages
+@import './apps/fabrikam/components/landing.scss';
+@import './apps/fabrikam/components/trainings-list.scss';
+
 //libs
 @import './libs/trainings/training-item.scss';
 @import './libs/ui/banner.scss';
 @import './libs/ui/slider.scss';
+@import './libs/ui/ui.scss';

@@ -1,12 +1,12 @@
 <div class="login-register">
     <div class="login-register-panel">
       <div class="grid">
-        <div class="p-col-6">
-          <img src="assets/img/login-photo.png" />
+        <div class="col-12 md:col-6 lg:col-6">
+          <img src="assets/img/nature.jpg" />
         </div>
         <div class="p-col-6 p-p-5">
-          <h3>Welcome to Fabrikam Recruitment</h3>
-          <h2>Login Page</h2>
+          <h3 class="welcome">Welcome to Fabrikam Recruitment</h3>
+          <h2 class="welcome">Login Page</h2>
           <form [formGroup]="loginFormGroup">
             <div class="p-grid p-mt-6">
               <div class="p-col-12">
@@ -19,6 +19,7 @@
                   <span *ngIf="loginForm.email.errors.email">email is invalid</span>
                 </small>
               </div>
+              <br>
               <div class="p-col-12">
                 <div class="p-inputgroup">
                   <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>

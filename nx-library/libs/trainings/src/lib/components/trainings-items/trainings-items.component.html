@@ -1,0 +1,12 @@
+<div class="trainings-items" *ngIf="training">
+    <div class="trainings-items-wrapper">
+      <img [src]="training.image" class="image" alt="" />
+      <h4 class="name">{{ training.name }}</h4>
+      <h5 class="price">{{ training.price | currency:'GBP':true }}</h5>
+      <p-button
+        styleClass="p-mt-3 add-to-cart"
+        label="Add to cart"
+        icon="pi pi-shopping-cart"
+      ></p-button>
+    </div>
+  </div>

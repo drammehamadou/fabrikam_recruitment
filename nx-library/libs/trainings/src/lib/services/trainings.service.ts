@@ -38,4 +38,8 @@ export class TrainingsService {
       .get<number>(`${this.apiURLTrainings}/get/count`)
       .pipe(map((objectValue: any) => objectValue.trainingCount));
   }
+
+  getFeaturedTrainings(count: number): Observable<Training[]> {
+    return this.http.get<Training[]>(`${this.apiURLTrainings}/get/featured/${count}`);
+  }
 }

@@ -3,17 +3,21 @@ import { CommonModule } from '@angular/common';
 import { TrainingsSearchComponent } from './components/trainings-search/trainings-search.component';
 import { CoursesBannerComponent } from './components/courses-banner/courses-banner.component';
 import { FeaturedTrainingsComponent } from './components/featured-trainings/featured-trainings.component';
-import { RouterModule } from '@angular/router'
+import { RouterModule } from '@angular/router';
+import { TrainingsItemsComponent } from './components/trainings-items/trainings-items.component'
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ButtonModule],
   declarations: [
     TrainingsSearchComponent,
     CoursesBannerComponent,
-    FeaturedTrainingsComponent
+    FeaturedTrainingsComponent,
+    TrainingsItemsComponent
   ],
   exports: [TrainingsSearchComponent,
     CoursesBannerComponent,
-    FeaturedTrainingsComponent]
+    FeaturedTrainingsComponent,
+    TrainingsItemsComponent]
 })
 export class TrainingsModule {}

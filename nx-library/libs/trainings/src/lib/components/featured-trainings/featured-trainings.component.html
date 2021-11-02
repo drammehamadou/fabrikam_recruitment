@@ -1,1 +1,8 @@
-<p>featured-trainings works!</p>
+<div class="featured-trainings p-mt-5">
+    <h3 class="p-mb-1">Feautured Trainings</h3>
+    <div class="grid">
+      <div class="col-12 md:col-6 lg:col-3" *ngFor="let training of featuredTrainings">
+        <trainings-items [training]="training"></trainings-items>
+      </div>
+    </div>
+  </div>

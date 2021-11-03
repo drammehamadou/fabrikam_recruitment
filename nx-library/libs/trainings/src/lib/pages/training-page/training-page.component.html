@@ -1,0 +1,55 @@
+<div class="training-page" *ngIf="training">
+    <div class="grid">
+      <div class="col-6">
+        <!-- <ui-gallery [images]="training.images"></ui-gallery> -->
+      </div>
+      <div class="col-12 md:col-3 lg:col-6 training">
+        <h2 class="training-name">{{ training.name }}</h2>
+        <p class="training-desc">
+          {{ training.description }}
+        </p>
+        <div class="training-rating">
+          <p-rating 
+          [(ngModel)]="training.rating" 
+          [cancel]="false" 
+          [disabled]="true"></p-rating>
+        </div>
+        <div class="training-price">
+          {{ training.price | currency:'GBP':true }}
+          <span class="price-before">{{ training.price! + 18 | currency:'GBP':true }}</span>
+        </div>
+        <div class="training-quantity">
+          <div class="p-field p-col-12 p-md-3 p-p-0">
+            <label for="quantity">Quantity</label>
+            <p-inputNumber
+              [(ngModel)]="quantity"
+              mode="decimal"
+              [showButtons]="true"
+              inputId="quantity"
+              [min]="0"
+              [max]="100"
+            >
+            </p-inputNumber>
+          </div>
+        </div>
+        <div class="training-actions">
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Book Now"
+            class="p-button-rounded p-mr-2"
+          ></button>
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Add to Cart"
+            class="p-button-rounded"
+            (onClick)="addTrainingToCart()"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

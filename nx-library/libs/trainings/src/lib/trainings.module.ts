@@ -10,10 +10,14 @@ import {AccordionModule} from 'primeng/accordion';
 import { TrainingsListComponent } from './pages/trainings-list/trainings-list.component';
 import {CheckboxModule} from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
+import { TrainingPageComponent } from './pages/training-page/training-page.component';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {RatingModule} from 'primeng/rating';
 
 const routes: Routes = [
 { path: 'trainings', component: TrainingsListComponent},
-{ path: 'course/:courseid', component: TrainingsListComponent}
+{ path: 'course/:courseid', component: TrainingsListComponent},
+{ path: 'trainings/:trainingid', component: TrainingPageComponent}
 
 ]
 
@@ -23,18 +27,23 @@ const routes: Routes = [
     ButtonModule,
     AccordionModule,
     CheckboxModule,
-  FormsModule],
+    FormsModule,
+    InputNumberModule,
+    RatingModule
+  ],
   declarations: [
     TrainingsSearchComponent,
     CoursesBannerComponent,
     FeaturedTrainingsComponent,
     TrainingsItemsComponent,
-    TrainingsListComponent
+    TrainingsListComponent,
+    TrainingPageComponent
   ],
   exports: [TrainingsSearchComponent,
     CoursesBannerComponent,
     FeaturedTrainingsComponent,
     TrainingsItemsComponent,
-    TrainingsListComponent]
+    TrainingsListComponent,
+    TrainingPageComponent]
 })
 export class TrainingsModule {}

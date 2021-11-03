@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
-import { TrainingListComponent } from './components/training-list/training-list.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { UiModule } from '@nx-library/ui';
@@ -16,12 +15,15 @@ import { TrainingsModule } from '@nx-library/trainings';
 import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
-  { path: '', component: LandingComponent },
-  { path: 'trainings', component: TrainingListComponent}
+  { path: '', component: LandingComponent }
 ]
 
 @NgModule({
-  declarations: [AppComponent, LandingComponent, TrainingListComponent, HeaderComponent, FooterComponent, NavComponent],
+  declarations: [AppComponent, 
+    LandingComponent, 
+     HeaderComponent, 
+     FooterComponent, 
+     NavComponent],
   imports: [BrowserModule, 
             RouterModule.forRoot(routes),
             HttpClientModule,

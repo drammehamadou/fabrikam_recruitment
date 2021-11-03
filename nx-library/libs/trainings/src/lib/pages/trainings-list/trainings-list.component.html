@@ -1,0 +1,26 @@
+<div class="trainings-page">
+    <div class="grid">
+      <div class="col-12 md:col-6 lg:col-3" *ngIf="!isCoursePage">
+        <h4>Courses</h4>
+        <div class="p-field-checkbox" *ngFor="let course of courses">
+          <p-checkbox
+            [(ngModel)]="course.checked"
+            [binary]="true"
+            [inputId]="course.id!"
+            (onChange)="courseFilter()"
+          ></p-checkbox>
+          <label for="{{ course.id }}">{{ course.name }}</label>
+        </div>
+      </div>
+      <div [ngClass]="{ 'p-col-9': !isCoursePage, 'p-col-12': isCoursePage }">
+        <div class="grid" *ngIf="trainings">
+          <div
+            [ngClass]="{ 'p-col-4': !isCoursePage, 'p-col-3': isCoursePage }"
+            *ngFor="let training of trainings"
+          >
+          <trainings-items [training]="training"></trainings-items>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

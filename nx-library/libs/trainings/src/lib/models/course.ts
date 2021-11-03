@@ -3,4 +3,5 @@ export class Course {
     name? : string;
     icon? : string;
     color? : string;
+    checked? : boolean;
 }

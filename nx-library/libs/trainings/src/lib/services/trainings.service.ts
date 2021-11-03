@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { map } from 'rxjs/operators';
@@ -13,8 +13,14 @@ export class TrainingsService {
 
   constructor(private http: HttpClient) {}
 
-  getTrainings(): Observable<Training[]> {
-    return this.http.get<Training[]>(this.apiURLTrainings);
+  getTrainings(coursesFilter?: string[] ): Observable<Training[]> {
+    let params = new HttpParams();
+    if(coursesFilter) {
+      params = params.append('courses', coursesFilter.join(','))
+    }
+    return this.http.get<Training[]>(this.apiURLTrainings, {
+      params : params
+    });
   }
 
   createTraining(trainingData: FormData): Observable<Training> {

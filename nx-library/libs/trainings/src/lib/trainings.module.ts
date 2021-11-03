@@ -12,7 +12,9 @@ import {CheckboxModule} from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
-{ path: 'trainings', component: TrainingsListComponent}
+{ path: 'trainings', component: TrainingsListComponent},
+{ path: 'course/:courseid', component: TrainingsListComponent}
+
 ]
 
 @NgModule({

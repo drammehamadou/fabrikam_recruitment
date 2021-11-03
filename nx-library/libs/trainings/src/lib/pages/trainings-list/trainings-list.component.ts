@@ -26,7 +26,6 @@ export class TrainingsListComponent implements OnInit {
       params.courseid ? this._getTrainings([params.courseid]) : this._getTrainings();
       params.courseid ? (this.isCoursePage = true) : (this.isCoursePage = false);
     });
-    this._getTrainings();
     this._getCourses();
   }
 

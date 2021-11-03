@@ -4,7 +4,7 @@
       <div class="col-12 md:col-2 lg:col-2" *ngFor="let course of courses">
         <div 
         class="course"
-        [routerLink]="'/trainings/course/' + course.id"
+        [routerLink]="'/course/' + course.id"
         [ngStyle]="{ backgroundColor: course.color }"
         >
           <div class="course-icon">

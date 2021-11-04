@@ -1,9 +1,9 @@
 <div class="trainings-items" *ngIf="training">
     <div class="trainings-items-wrapper">
-      <img [routerLink]="'/trainings/' + training.id" [src]="training.image" class="image" alt="" />
+      <img [src]="training.image" class="image" alt="" />
       <h4 class="name">{{ training.name }}</h4>
       <h5 class="price">{{ training.price | currency:'GBP':true }}</h5>
-      <p-button
+      <p-button [routerLink]="'/trainings/' + training.id"
         styleClass="p-mt-3 add-to-cart"
         label="See more"
         icon="pi pi-info-circle"

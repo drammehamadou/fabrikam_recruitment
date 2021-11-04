@@ -13,7 +13,7 @@
        <br>
        {{training.price | currency:'GBP':true }}
        <br>
-       <button pButton 
+       <button pButton [routerLink]="'/trainings/' + training.id"
        type="button" 
        label="See more" 
        class="p-button-outlined">

@@ -1,7 +1,8 @@
 <div class="training-page" *ngIf="training">
     <div class="grid">
-      <div class="col-6">
-        <!-- <ui-gallery [images]="training.images"></ui-gallery> -->
+      <div class="col-12 md:col-3 lg:col-6">
+        <!-- <ui-gallery [images]="training.images!"></ui-gallery>         -->
+      <img src="{{training.image}}" alt="" class="gallery">
       </div>
       <div class="col-12 md:col-3 lg:col-6 training">
         <h2 class="training-name">{{ training.name }}</h2>
@@ -18,7 +19,7 @@
           {{ training.price | currency:'GBP':true }}
           <span class="price-before">{{ training.price! + 18 | currency:'GBP':true }}</span>
         </div>
-        <div class="training-quantity">
+        <!-- <div class="training-quantity">
           <div class="p-field p-col-12 p-md-3 p-p-0">
             <label for="quantity">Quantity</label>
             <p-inputNumber
@@ -31,7 +32,7 @@
             >
             </p-inputNumber>
           </div>
-        </div>
+        </div> -->
         <div class="training-actions">
           <button
             pButton
@@ -40,14 +41,14 @@
             label="Book Now"
             class="p-button-rounded p-mr-2"
           ></button>
-          <button
+          <!-- <button
             pButton
             pRipple
             type="button"
             label="Add to Cart"
             class="p-button-rounded"
             (onClick)="addTrainingToCart()"
-          ></button>
+          ></button> -->
         </div>
       </div>
     </div>

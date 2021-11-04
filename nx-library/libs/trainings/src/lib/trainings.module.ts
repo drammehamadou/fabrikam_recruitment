@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { TrainingPageComponent } from './pages/training-page/training-page.component';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {RatingModule} from 'primeng/rating';
+import {GalleriaModule} from 'primeng/galleria';
+import { UiModule } from '@nx-library/ui';
 
 const routes: Routes = [
 { path: 'trainings', component: TrainingsListComponent},
@@ -29,7 +31,9 @@ const routes: Routes = [
     CheckboxModule,
     FormsModule,
     InputNumberModule,
-    RatingModule
+    RatingModule,
+    GalleriaModule,
+    UiModule
   ],
   declarations: [
     TrainingsSearchComponent,

@@ -30,6 +30,7 @@ import { TagModule } from 'primeng/tag';
 import {InputMaskModule} from 'primeng/inputmask';
 import { FieldsetModule } from 'primeng/fieldset';
 import {AccordionModule} from 'primeng/accordion';
+import {CalendarModule} from 'primeng/calendar';
 
 import { CoursesService } from '@nx-library/trainings';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -83,7 +84,8 @@ import { AppRoutingModule } from './app-routing.module';
     FieldsetModule,
     AccordionModule,
     AttendeesModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CalendarModule
   ],
   providers: [CoursesService, MessageService, ConfirmationService,
   {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}

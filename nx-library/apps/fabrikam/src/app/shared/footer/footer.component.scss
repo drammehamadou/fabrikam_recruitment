@@ -1,21 +1,21 @@
 footer {
-    background-color: var(--yellow-100);
-    min-height: 50px;
-    padding: 10px 25px;
-    width: 100%;
-    margin-top: 25px;
-  
-    .footer-wrapper {
-      align-items: center;
-  
-      .social {
-        margin-top: 15px;
-        text-align: right;
-        .nav {
-          justify-content: flex-end;
+  text-align: center;
+  min-height: 50px;
+  padding: 3px;
+  background-color: grey;
+  padding: 10px 25px;
+  color: white;
+  width: 100%;
+
+  .footer-wrapper {
+          align-items: center;
+      
+          .social {
+            margin-top: 15px;
+            text-align: right;
+            .nav {
+              justify-content: flex-end;
+            }
+          }
         }
-      }
-    }
-    
-  }
-  
+}

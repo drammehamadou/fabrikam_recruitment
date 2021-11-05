@@ -13,4 +13,5 @@ export class Training {
   reviews?: number;
   isFeatured?: boolean;
   dateCreated?: string;
+  schedule?: string;
 }

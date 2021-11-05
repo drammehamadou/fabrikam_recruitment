@@ -1,23 +1,17 @@
 <p-toast></p-toast>
 <div class="admin-page">
-    <p-card 
-    [header]="editmode ? 'Edit Training' : 'Add Training'"
-    subheader="You can add or edit trainings here">
-    <div class="p-grid">
-        <div class="p-col-12">
-    <form [formGroup]="form">
-        <div class="p-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="name">Name</label>
-                <input formControlName="name" 
-                id="name" type="text" pInputText> 
-            <small *ngIf="trainingForm.name.invalid && isSubmitted" 
-            class="p-error">Name is required</small>
-            </div>
-            <br>
-            <!-- <div class="p-fluid p-formgrid p-grid"> -->
-                <div class="p-field p-col-4">
-                    <label for="course">Course</label>
+    <p-card [header]="editmode ? 'Edit Training' : 'Add Training'" subheader="You can add or edit trainings here">
+        <form [formGroup]="form">
+        <div class="card">
+            <div class="p-fluid p-formgrid grid">
+                <div class="p-field col-12 md:col-6 lg:col-6">
+                    <label for="name"><strong>Training Title</strong></label>
+                    <input id="name" formControlName="name" type="text" pInputText> 
+                    <small *ngIf="trainingForm.name.invalid && isSubmitted" class="p-error">Training title is required</small>
+                </div>
+                
+                <div class="p-field col-12 md:col-6 lg:col-6">
+                    <label for="course"><strong>Course</strong></label>
                     <p-dropdown 
                     [options]="courses" 
                     formControlName="course" 
@@ -27,94 +21,94 @@
                     filterBy="name" 
                     [showClear]="true" 
                     placeholder="Select a Course"></p-dropdown>
-                    <small *ngIf="trainingForm.course.invalid && isSubmitted" 
-                    class="p-error">Course is required</small>
+                    <small *ngIf="trainingForm.course.invalid && isSubmitted" class="p-error">Course is required</small> 
                 </div>
-            <!-- </div> -->
-            <br>
-            <div class="p-field p-col-4">
-                <label for="price">Price</label>
-                <p-inputNumber 
-                formControlName="price" 
-                mode="decimal" 
-                inputId="price" [useGrouping]="false">
-                </p-inputNumber>
-                <small *ngIf="trainingForm.price.invalid && isSubmitted" 
-                class="p-error">Price is required</small>
-            </div>
-        </div>
-        <br>
-        <div class="p-fluid p-formgrid p-grid">
-            <div class="p-field p-col-4">
-                <label for="countInTraining">Total number of space Availability</label>
-                <p-inputNumber 
-                formControlName="countInTraining" 
-                mode="decimal" 
-                inputId="countInTraining" [useGrouping]="false">
-                </p-inputNumber>
-                <small *ngIf="trainingForm.countInTraining.invalid && isSubmitted" 
-                class="p-error">Total Availability is required</small>
-            </div>
-            <br>
-            <div class="p-field p-col-4">
-                <label for="countInTraining">Is Featured</label>
-                <p-inputSwitch formControlName="isFeatured" id="isFeatured"></p-inputSwitch>
-            </div>
-            <br>
-            <div class="p-field p-col">
-                <label for="description">Training Details</label>
-                <br>
-                <textarea [rows]="5" [cols]="30" 
-                formControlName="description"
-                id="description"
-                pInputTextarea></textarea>
-                <small *ngIf="trainingForm.description.invalid && isSubmitted" 
-                class="p-error">Description is required</small>
-            </div>
-            <br>
-            <div class="p-field p-col-12">
-                <label for="name">Main Image</label>
-                <br>
-                <input
-                  type="file"
-                  class="p-inputtext"
-                  accept="image/*"
-                  (change)="onImageUpload($event)"
-                />
-                <small *ngIf="trainingForm.image.invalid && isSubmitted" class="p-error"
-                  >Image is required</small
-                >
-                <div class="p-col-2 p-mt-2 p-pl-0">
-                  <img style="width: 100%" [src]="imageDisplay" alt="training img" />
+
+                <div class="p-field col-12 md:col-6 lg:col-6">
+                    <label for="price"><strong>Cost</strong></label>
+                    <p-inputNumber 
+                    formControlName="price" 
+                    mode="decimal" 
+                    inputId="price" [useGrouping]="false">
+                    </p-inputNumber>
+                    <small *ngIf="trainingForm.price.invalid && isSubmitted" class="p-error">Price is required</small>
                 </div>
-              </div>
+
+                <div class="p-field col-12 md:col-6 lg:col-6">
+                    <label for="countInTraining"><strong>Number of space available</strong></label>
+                    <p-inputNumber 
+                    formControlName="countInTraining" 
+                    mode="decimal" 
+                    inputId="countInTraining" [useGrouping]="false">
+                    </p-inputNumber>
+                    <small *ngIf="trainingForm.countInTraining.invalid && isSubmitted" 
+                    class="p-error">Number of space available is required</small>
+                </div>
+
+                <div class="p-field col-12 md:col-6 lg:col-6">
+                    <label for="schedule"><strong>Schedule</strong></label>
+                    <input id="schedule" formControlName="schedule" type="text" pInputText> 
+                    <small *ngIf="trainingForm.schedule.invalid && isSubmitted" class="p-error">Schedule is required</small>
+                </div>
+
+                <div class="p-field col-12 md:col-6 lg:col-3">
+                    <label for="countInTraining"><strong>Feature on main page</strong></label>
+                    <p-inputSwitch formControlName="isFeatured" id="isFeatured"></p-inputSwitch>
+                </div>
+
+                <div class="p-field col-12 md:col-6 lg:col-12">
+                    <label for="description"><strong>Training synopsis</strong></label>
+                    <br>
+                    <textarea [rows]="5" [cols]="30" 
+                    formControlName="description"
+                    id="description"
+                    pInputTextarea></textarea>
+                    <small *ngIf="trainingForm.description.invalid && isSubmitted" 
+                    class="p-error">Training synopsis is required</small>
+                </div>
+
+                <div class="p-field col-12 md:col-6 lg:col-6">
+                    <label for="name"><strong>Main Image</strong></label>
+                    <br>
+                    <input
+                    type="file"
+                    class="p-inputtext"
+                    accept="image/*"
+                    (change)="onImageUpload($event)"
+                    />
+                    <small *ngIf="trainingForm.image.invalid && isSubmitted" class="p-error"
+                    >Image is required</small
+                    >
+                    <div class="p-col-2 p-mt-2 p-pl-0">
+                        <img style="width: 100%" [src]="imageDisplay" alt="" />
+                    </div>
+                </div>
+
+            </div>
         </div>
     </form>
-    </div>
-    </div>
-    <br>
-    <div class="p-grid p-mb-5">
-        <div class="p-col-12">
-    <p-toolbar>
-        <ng-template pTemplate="left">
-            <button pButton pRipple 
-            [label]="editmode ? 'Update' : 'Create'" 
-            icon="pi pi-plus" 
-            class="p-button-primary" 
-            (click)="onSubmit()"></button>
-        </ng-template>
+        <div class="p-grid p-mb-5">
+            <div class="p-col-12">
+                <p-toolbar>
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple 
+                        [label]="editmode ? 'Update' : 'Create'" 
+                        icon="pi pi-plus" 
+                        class="p-button-primary" 
+                        (click)="onSubmit()"></button>
+                    </ng-template>
 
-        <ng-template pTemplate="right">
-            <button pButton pRipple 
-            label="Cancel" 
-            icon="pi pi-arrow-circle-left" 
-            class="p-button-secondary"
-            (click)="onCancel()"
-            routerLink="/courses"></button>
-        </ng-template>
-    </p-toolbar>
-    </div>
-    </div>
+                    <ng-template pTemplate="right">
+                        <button pButton pRipple 
+                        label="Cancel" 
+                        icon="pi pi-arrow-circle-left" 
+                        class="p-button-secondary"
+                        (click)="onCancel()"
+                        routerLink="/courses"></button>
+                    </ng-template>
+                </p-toolbar>
+            </div>
+        </div>
     </p-card>
 </div>
 

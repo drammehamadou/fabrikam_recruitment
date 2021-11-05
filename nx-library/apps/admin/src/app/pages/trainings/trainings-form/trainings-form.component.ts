@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./trainings-form.component.scss']
 })
 export class TrainingsFormComponent implements OnInit, OnDestroy {
-  editmode : boolean = false;
+  editmode: boolean = false;
   form: FormGroup;
   isSubmitted = false;
   imageDisplay: string | ArrayBuffer;
@@ -49,6 +49,7 @@ export class TrainingsFormComponent implements OnInit, OnDestroy {
       course: ['', Validators.required],
       countInTraining: ['', Validators.required],
       description: ['', Validators.required],
+      schedule: ['', Validators.required],
       image: ['', Validators.required],
       isFeatured: [false]
     });
@@ -137,6 +138,7 @@ export class TrainingsFormComponent implements OnInit, OnDestroy {
           this.trainingForm.countInTraining.setValue(training.countInTraining);
           this.trainingForm.isFeatured.setValue(training.isFeatured);
           this.trainingForm.description.setValue(training.description);
+          this.trainingForm.schedule.setValue(training.schedule);
           this.imageDisplay = training.image;
           this.trainingForm.image.setValidators([]);
           this.trainingForm.image.updateValueAndValidity();

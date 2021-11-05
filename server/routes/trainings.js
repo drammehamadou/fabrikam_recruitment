@@ -52,7 +52,8 @@ router.post(`/`, uploadOptions.single('image'), async (req, res) => {
         countInTraining: req.body.countInTraining,
         rating: req.body.rating,
         reviews: req.body.reviews,
-        isFeatured: req.body.isFeatured
+        isFeatured: req.body.isFeatured,
+        schedule: req.body.schedule
     })
 
     training = await training.save();
@@ -121,7 +122,8 @@ router.put(`/:id`, uploadOptions.single('image'), async (req, res) => {
             countInTraining: req.body.countInTraining,
             rating: req.body.rating,
             reviews: req.body.reviews,
-            isFeatured: req.body.isFeatured
+            isFeatured: req.body.isFeatured,
+            schedule: req.body.schedule
         },
         //return new updated data
         {new: true}

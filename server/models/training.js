@@ -46,6 +46,9 @@ const trainingSchema = mongoose.Schema({
     dateCreated: {
         type: Date,
         default: Date.now
+    },
+    schedule: {
+        type: String
     }
 })
 

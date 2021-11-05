@@ -30,10 +30,11 @@
                         <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
                         <th pSortableColumn="course">Course <p-sortIcon field="course"></p-sortIcon></th>
                         <th pSortableColumn="countInTraining">Availability <p-sortIcon field="countInTraining"></p-sortIcon></th>
-                        <th>Rating</th>
-                        <th>Review</th>
+                        <!-- <th>Rating</th>
+                        <th>Review</th> -->
                         <th>Featured</th>
                         <th pSortableColumn="dateCreated">Date Created <p-sortIcon field="dateCreated"></p-sortIcon></th>
+                        <th pSortableColumn="schedule">Date schedule <p-sortIcon field="schedule"></p-sortIcon></th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -48,10 +49,11 @@
                         <td>{{training.price}}</td>
                         <td>{{training.course.name}}</td>
                         <td>{{training.countInTraining}}</td>
-                        <td>{{training.rating}}</td>
-                        <td>{{training.reviews}}</td>
+                        <!-- <td>{{training.rating}}</td>
+                        <td>{{training.reviews}}</td> -->
                         <td>{{training.isFeatured}}</td>
-                        <td>{{training.dateCreated | date: 'short'}}</td>
+                        <td>{{training.dateCreated | date: 'fullDate'}}</td>
+                        <td>{{training.schedule}}</td>
                         <td>
                             <button pButton pRipple 
                             icon="pi pi-pencil" 

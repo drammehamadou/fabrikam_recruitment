@@ -9,9 +9,11 @@
 
   <p-accordion *ngFor="let training of featuredTrainings">
     <p-accordionTab header="{{training.name}}" [selected]="true">
-       {{training.description}}
+       <p>{{training.description}}</p>
        <br>
-       {{training.price | currency:'GBP':true }}
+       <p>{{training.schedule}}</p>
+       <br>
+       <p>{{training.price | currency:'GBP':true }}</p>
        <br>
        <button pButton [routerLink]="'/trainings/' + training.id"
        type="button" 

@@ -9,6 +9,9 @@
         <p class="training-desc">
           {{ training.description }}
         </p>
+        <p class="training-schedule">
+          {{training.schedule}}
+        </p>
         <div class="training-rating">
           <p-rating 
           [(ngModel)]="training.rating" 
@@ -19,20 +22,6 @@
           {{ training.price | currency:'GBP':true }}
           <span class="price-before">{{ training.price! + 18 | currency:'GBP':true }}</span>
         </div>
-        <!-- <div class="training-quantity">
-          <div class="p-field p-col-12 p-md-3 p-p-0">
-            <label for="quantity">Quantity</label>
-            <p-inputNumber
-              [(ngModel)]="quantity"
-              mode="decimal"
-              [showButtons]="true"
-              inputId="quantity"
-              [min]="0"
-              [max]="100"
-            >
-            </p-inputNumber>
-          </div>
-        </div> -->
         <div class="training-actions">
           <button
             pButton

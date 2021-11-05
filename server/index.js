@@ -37,16 +37,19 @@ app.use(`${api}/bookings`, bookingsRoutes);
 mongoose.connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: 'fabrikam-db'
+    dbName: process.env.DB_NAME
 })
 .then(() =>{
-    console.log('Database connection is ready...')
+    console.log('we are using ' + process.env.DB_NAME);
+    console.log('Database Connection is ready...');
 })
 .catch((err) => {
     console.log(err);
 })
 
+const PORT = process.env.PORT || 2021;
+
 //server
-app.listen(2021, () => {
+app.listen(PORT, () => {
     console.log('Server is running http://localhost:2021');
 })

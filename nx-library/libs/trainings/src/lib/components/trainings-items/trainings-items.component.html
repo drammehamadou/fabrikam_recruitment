@@ -2,6 +2,7 @@
     <div class="trainings-items-wrapper">
       <img [src]="training.image" class="image" alt="" />
       <h4 class="name">{{ training.name }}</h4>
+      <p>{{training.schedule}}</p>
       <h5 class="price">{{ training.price | currency:'GBP':true }}</h5>
       <p-button [routerLink]="'/trainings/' + training.id"
         styleClass="p-mt-3 add-to-cart"

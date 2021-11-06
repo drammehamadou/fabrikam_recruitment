@@ -25,6 +25,11 @@
               <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
               <th>Email</th>
               <th>Is Admin</th>
+              <th>Phone</th>
+              <th>Address1</th>
+              <th>Address2</th>
+              <th>Post code</th>
+              <th>County</th>
               <th>Country</th>
               <th>Edit</th>
               <th>Delete</th>
@@ -49,6 +54,11 @@
                   [rounded]="true"
                 ></p-tag>
               </td>
+              <td>{{ attendee.phone }}</td>
+              <td>{{ attendee.address1 }}</td>
+              <td>{{ attendee.address2 }}</td>
+              <td>{{ attendee.postCode }}</td>
+              <td>{{ attendee.county }}</td>
               <td>{{ getCountryName(attendee.country) }}</td>
               <td>
                 <p-button

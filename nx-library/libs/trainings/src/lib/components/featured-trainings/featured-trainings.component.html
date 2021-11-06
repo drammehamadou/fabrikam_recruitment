@@ -7,11 +7,16 @@
     </div>
   </div>
 
-  <p-accordion *ngFor="let training of featuredTrainings">
-    <p-accordionTab header="{{training.name}}" [selected]="true">
+  <p-accordion *ngFor="let training of featuredTrainings" [multiple]="true">
+    <p-accordionTab header="{{training.name}} {{training.schedule}}">
        <p>{{training.description}}</p>
        <br>
-       <p>{{training.schedule}}</p>
+       <div class="training-rating">
+        <p-rating 
+        [(ngModel)]="training.rating" 
+        [cancel]="false" 
+        [disabled]="true"></p-rating>
+      </div>
        <br>
        <p>{{training.price | currency:'GBP':true }}</p>
        <br>

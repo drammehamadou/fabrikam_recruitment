@@ -4,6 +4,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { CoursesListComponent } from './pages/courses/courses-list/courses-list.component';
@@ -43,6 +47,11 @@ import { AttendeesModule, JwtInterceptor } from '@nx-library/attendees';
 import { RecommendationComponent } from './pages/recommendation/recommendation.component';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { AppRoutingModule } from './app-routing.module';
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
 
 @NgModule({
   declarations: [
@@ -85,7 +94,8 @@ import { AppRoutingModule } from './app-routing.module';
     AccordionModule,
     AttendeesModule,
     AppRoutingModule,
-    CalendarModule
+    CalendarModule,
+    FullCalendarModule
   ],
   providers: [CoursesService, MessageService, ConfirmationService,
   {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}

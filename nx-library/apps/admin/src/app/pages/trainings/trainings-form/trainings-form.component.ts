@@ -1,11 +1,12 @@
 import { Location } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Course, CoursesService, Training, TrainingsService } from '@nx-library/trainings';
 import { MessageService } from 'primeng/api';
 import { Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { FullCalendarComponent, CalendarOptions } from '@fullcalendar/angular'; // useful for typechecking
 
 @Component({
   selector: 'admin-trainings-form',
@@ -20,6 +21,9 @@ export class TrainingsFormComponent implements OnInit, OnDestroy {
   currentTrainingId: string;
   courses : Course[] = [];
   endsubs$: Subject<any> = new Subject();
+
+  // references the #calendar in the template
+  @ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
   constructor(private formBuilder: FormBuilder,
               private coursesService: CoursesService,
@@ -183,4 +187,7 @@ export class TrainingsFormComponent implements OnInit, OnDestroy {
     return this.form.controls;
   }
 
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth'
+  };
 }

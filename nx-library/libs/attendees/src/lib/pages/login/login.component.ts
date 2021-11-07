@@ -27,12 +27,15 @@ export class LoginComponent implements OnInit {
     this._initLoginForm();
   }
 
+  //validation email and password
   private _initLoginForm() {
     this.loginFormGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
+
+  //user submitting credentials
   onSubmit() {
     this.isSubmitted = true;
 

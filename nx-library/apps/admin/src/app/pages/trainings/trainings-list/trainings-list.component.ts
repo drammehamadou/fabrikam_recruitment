@@ -41,9 +41,10 @@ export class TrainingsListComponent implements OnInit {
     this.router.navigateByUrl(`trainings/form/${trainingid}`)
   };
 
+  //Delete training session with confirmation
   deleteTraining (trainingId: string) {
     this.confirmationService.confirm({
-      message: 'Do you want to delete this Training?',
+      message: 'Do you want to delete this Training session?',
       header: 'Delete Training',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -56,14 +57,14 @@ export class TrainingsListComponent implements OnInit {
             this.messageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: 'Training is deleted!'
+              detail: 'Training session is deleted!'
             });
           },
           () => {
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: 'Training is not deleted!'
+              detail: 'Training Session is not deleted!'
             });
           }
         );

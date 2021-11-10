@@ -13,5 +13,5 @@ export class Booking {
   status?: number;
   totalPrice?: string;
   attendee?: Attendee;
-  dateBooked?: string;
+  dateBooked?: Date;
 }
